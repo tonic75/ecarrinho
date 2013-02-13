@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<frame size="640,280" title="Hello SWIXML World"
+	defaultCloseOperation="JFrame.EXIT_ON_CLOSE"
+	plaf="com.sun.java.swing.plaf.windows.WindowsLookAndFeel">
+
+	<panel constraints="BorderLayout.CENTER" Layout="GridBagLayout">
+		<label labelfor="user" font="Georgia-BOLD-12" foreground="blue"
+			text="Usuário:">
+			<gridbagconstraints gridx="0" gridy="0" />
+		</label>
+		<textfield id="user" columns="20">
+			<gridbagconstraints gridx="1" gridy="0" />
+		</textfield>
+
+		<label labelfor="pass" font="Georgia-BOLD-12" foreground="blue"
+			text="Senha:">
+			<gridbagconstraints gridx="0" gridy="1" />
+		</label>
+		<textfield id="pass" columns="20">
+			<gridbagconstraints gridx="1" gridy="1" />
+		</textfield>
+	</panel>
+
+	<panel constraints="BorderLayout.SOUTH">
+		<button name="btn3" text="Entrar"/>
+	</panel>
+</frame>
