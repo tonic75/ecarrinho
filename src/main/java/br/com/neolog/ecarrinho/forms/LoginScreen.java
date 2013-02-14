@@ -38,13 +38,22 @@ public class LoginScreen extends JFrame {
 	}
 	
 	public Action logIn = new AbstractAction() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -168221978922967631L;
+
 		public void actionPerformed(ActionEvent e) {
-			Product prod = new Product("produto1", "descricao 1", 500.5);
-			productDAO.save(prod);			
+				
 		}
 	};
 	
 	public Action newUser = new AbstractAction() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -9198682512676260864L;
+
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("ahala papiu");
 		}

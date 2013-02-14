@@ -1,4 +1,4 @@
-package br.com.neolog.ecarrinho.conf;
+package br.com.neolog.ecarrinho.util;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
