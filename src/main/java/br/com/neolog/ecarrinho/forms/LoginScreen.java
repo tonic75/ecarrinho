@@ -1,18 +1,17 @@
 package br.com.neolog.ecarrinho.forms;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import org.swixml.SwingEngine;
 
-import br.com.neolog.ecarrinho.bean.Product;
-import br.com.neolog.ecarrinho.dao.ProductDAO;
+import br.com.neolog.ecarrinho.bean.User;
+import br.com.neolog.ecarrinho.start.Start;
 
 public class LoginScreen extends JFrame {
 
@@ -21,13 +20,10 @@ public class LoginScreen extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	ProductDAO productDAO;
+	private JTextField userText;
+	private JPasswordField passText;
 
-	private JTextField user;
-	private JTextField pass;
-
-	public LoginScreen(final ProductDAO productDAO) {
-		this.productDAO = productDAO;
+	public LoginScreen() {
 
 		try {
 			new SwingEngine(this).render("swixml/LoginScreen.xml").setVisible(
@@ -44,7 +40,15 @@ public class LoginScreen extends JFrame {
 		private static final long serialVersionUID = -168221978922967631L;
 
 		public void actionPerformed(ActionEvent e) {
-				
+			User user = (User) Start.contextoPrincipal.getBean("user");
+			user.setUser(userText.getText());
+//			char[] passChar = passText.getPassword().toString();
+//			if(  )
+			user.setPass(String.valueOf(passText.getPassword()));
+			if( user.isValidUser() )
+			{
+				System.out.println("usuario valido");
+			}
 		}
 	};
 	

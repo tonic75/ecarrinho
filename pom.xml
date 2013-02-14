@@ -1,23 +1,24 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>br.com.neolog</groupId>
-  <artifactId>carrinho</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>E-Carrinho</name>
-  
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.neolog</groupId>
+	<artifactId>carrinho</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>E-Carrinho</name>
+
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- Versões das dependências -->
 		<hibernate-version>4.1.9.Final</hibernate-version>
-		<mysql-connector-version>5.1.22</mysql-connector-version> <!--  Remover quando trocar o BD -->
+		<mysql-connector-version>5.1.22</mysql-connector-version> <!-- Remover quando trocar o BD -->
 		<spring-version>3.2.1.RELEASE</spring-version>
 		<aspectj-version>1.6.11</aspectj-version>
 		<guava-version>13.0</guava-version>
 		<junit-version>4.11</junit-version>
-		
+
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>springsource-repo</id>
@@ -25,7 +26,7 @@
 			<url>http://repo.springsource.org/release</url>
 		</repository>
 	</repositories>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -88,8 +89,13 @@
 			<version>${hibernate-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>  <!--  Remover quando trocar o BD -->
-			<artifactId>mysql-connector-java</artifactId> 
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jpamodelgen</artifactId>
+			<version>1.0.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>  <!-- Remover quando trocar o BD -->
+			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-connector-version}</version>
 		</dependency>
 		<dependency>
@@ -123,6 +129,4 @@
 			<version>${guava-version}</version>
 		</dependency>
 	</dependencies>
-	
-	
 </project>

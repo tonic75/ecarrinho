@@ -3,8 +3,9 @@ package br.com.neolog.ecarrinho.util;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import br.com.neolog.ecarrinho.bean.User;
 import br.com.neolog.ecarrinho.dao.ProductDAO;
-import br.com.neolog.ecarrinho.forms.LoginScreen;
+import br.com.neolog.ecarrinho.dao.UserDAO;
 
 @Configuration
 public class SpringConf {
@@ -16,9 +17,14 @@ public class SpringConf {
 	}
 	
 	@Bean
-	public LoginScreen loginScreen( ProductDAO productDAO )
+	public UserDAO userDAO()
 	{
-		return new LoginScreen(productDAO);
+		return new UserDAO();
 	}
-
+	
+	@Bean
+	public User user( UserDAO userDAO )
+	{
+		return new User(userDAO);
+	}
 }

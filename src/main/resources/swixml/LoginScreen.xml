@@ -8,7 +8,7 @@
 			text="Usuário:">
 			<gridbagconstraints gridx="0" gridy="0" />
 		</label>
-		<textfield id="user" columns="20">
+		<textfield id="userText" columns="20">
 			<gridbagconstraints gridx="1" gridy="0" />
 		</textfield>
 
@@ -16,9 +16,9 @@
 			text="Senha:">
 			<gridbagconstraints gridx="0" gridy="1" />
 		</label>
-		<textfield id="pass" columns="20">
+		<passwordfield id="passText" columns="20">
 			<gridbagconstraints gridx="1" gridy="1" />
-		</textfield>
+		</passwordfield>
 	</panel>
 
 	<panel constraints="BorderLayout.SOUTH" layout="GridBagLayout">
