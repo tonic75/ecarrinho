@@ -3,7 +3,6 @@ package br.com.neolog.ecarrinho.conf;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import br.com.neolog.ecarrinho.bean.Product;
 import br.com.neolog.ecarrinho.dao.ProductDAO;
 import br.com.neolog.ecarrinho.forms.LoginScreen;
 

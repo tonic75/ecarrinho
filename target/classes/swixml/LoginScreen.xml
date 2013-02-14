@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<frame size="640,280" title="Hello SWIXML World"
+<frame size="270,150" title="Hello SWIXML World"
 	defaultCloseOperation="JFrame.EXIT_ON_CLOSE"
 	plaf="com.sun.java.swing.plaf.windows.WindowsLookAndFeel">
 
@@ -21,7 +21,12 @@
 		</textfield>
 	</panel>
 
-	<panel constraints="BorderLayout.SOUTH">
-		<button name="btn3" text="Entrar"/>
+	<panel constraints="BorderLayout.SOUTH" layout="GridBagLayout">
+		<button text="Entrar" action="logIn">
+			<gridbagconstraints gridx="0" gridy="0" />
+		</button>
+		<menuitem text="Nao é cadastrado?" foreground="blue" action="newUser">
+			<gridbagconstraints gridx="0" gridy="2" />
+		</menuitem>
 	</panel>
 </frame>
