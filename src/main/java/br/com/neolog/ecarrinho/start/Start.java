@@ -10,9 +10,8 @@ public class Start {
 	public static final ApplicationContext contextoPrincipal = new ClassPathXmlApplicationContext("META-INF/beans.xml");
 	
 	public static void main(String[] args) {
-		//@SuppressWarnings("unused")
-		//LoginScreen login = (LoginScreen) contextoPrincipal.getBean("loginScreen");
-		new LoginScreen();
+		@SuppressWarnings("unused")
+		LoginScreen login = (LoginScreen) contextoPrincipal.getBean("loginScreen");
 	}
 
 }
