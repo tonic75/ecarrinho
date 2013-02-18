@@ -2,6 +2,9 @@ package br.com.neolog.ecarrinho.dao;
 
 import br.com.neolog.ecarrinho.bean.User;
 
-public interface UserDao extends GenericDao<User> {
-	public User getUserbyUserName( String user );
-}
+/**
+ * @author antonio.moreira
+ *
+ * A interface for a generic dao for User.
+ */
+public interface UserDao extends GenericDao<User, String> {}

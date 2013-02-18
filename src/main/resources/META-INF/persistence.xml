@@ -20,7 +20,7 @@
 			<property name="hibernate.connection.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect" />
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
 			<property name="connection.pool_size" value="1" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<property name="hibernate.archive.autodetection" value="class, hbm"/>
 			
 			

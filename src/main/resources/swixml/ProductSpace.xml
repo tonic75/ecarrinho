@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debugpanel id="outsidePanel">
+	<formlayout colspecs="10px, f:128px, 10px, l:140px:g"
+		rowspecs="8px, f:128px:n" />
+
+	<label id="iconLabel">
+		<cellconstraints gridX="2" gridY="2" />
+	</label>
+
+	<debugpanel>
+		<formlayout colspecs="140px" rowspecs="70px, 20px, 38px" />
+		<cellconstraints gridX="4" gridY="2" />
+		<label id="description" HorizontalAlignment="CENTER">
+			<cellconstraints gridX="1" gridY="1" />
+		</label>
+
+		<label id="price" HorizontalAlignment="CENTER">
+			<cellconstraints gridX="1" gridY="2" />
+		</label>
+
+		<debugpanel>
+			<formlayout colspecs="20px, 10px, 108px" rowspecs="38px" />
+			<cellconstraints gridX="1" gridY="3" />
+			<textfield id="qtd" text="1">
+				<cellconstraints gridX="1" gridY="1" />
+			</textfield>
+			<button name="addToBasketButton" id="addToBasketButton" text="Adicionar"
+				action="addToBasket">
+				<cellconstraints gridX="3" gridY="1" />
+			</button>
+		</debugpanel>
+
+	</debugpanel>
+
+
+</debugpanel>

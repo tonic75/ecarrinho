@@ -8,111 +8,94 @@ import javax.persistence.ManyToOne;
 
 import br.com.neolog.ecarrinho.util.Persistable;
 
+import com.google.common.base.Objects;
+
 /**
- * The Class Product.
- * Class that describes a product
+ * @author antonio.moreira
+ * 
+ *         The Class Product. Class that describes a product with his category,
+ *         description, price and its icon.
  */
 @Entity
 public class Product implements Persistable {
 
-	/** The id. */
+	public static final String ICON_PATH = "src//main//resources//icon//";
+	
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	/** The category id. */
+
 	@ManyToOne
 	private Category category;
-	
-	/** The name. */
-	@Basic
-	private String name;
-	
-	/** The description. */
+
 	@Basic
 	private String description;
-	
-	/** The price. */
+
 	@Basic
 	private Double price;
-	
+
+	@Basic
+	private String iconName;
+
 	/**
-	 * Instantiates a new product.
+	 * Empty default constructor for hibernate.
 	 */
-	public Product() {}
-	
-	/**
-	 * Instantiates a new product.
-	 *
-	 * @param description the description
-	 * @param price the price
-	 */
-	public Product( String name, String description, Double price )
-	{
-		this.name = name;
-		this.description = description;
-		this.price = price;
+	public Product() {
 	}
 
-	
-//	/**
-//	 * Gets the id.
-//	 *
-//	 * @return the id
-//	 */
-//	public Integer getId() {
-//		return id;
-//	}
-//
-//	/**
-//	 * Gets the description.
-//	 *
-//	 * @return the description
-//	 */
-//	public String getDescription() {
-//		return description;
-//	}
-//
-//	/**
-//	 * Sets the description.
-//	 *
-//	 * @param description the new description
-//	 */
-//	public void setDescription(String description) {
-//		if(description.length() == 0)
-//			throw new IllegalArgumentException("Empty description");
-//		else
-//			this.description = description;
-//	}
-//
-//	/**
-//	 * Gets the price.
-//	 *
-//	 * @return the price
-//	 */
-//	public Double getPrice() {
-//		return price;
-//	}
-//
-//	/**
-//	 * Sets the price.
-//	 *
-//	 * @param price the new price
-//	 */
-//	public void setPrice(Double price) {
-//		if(price < 0.0)
-//			throw new IllegalArgumentException("Negative price");
-//		else
-//			this.price = price;
-//	}
-//	
-//	/**
-//	 * Gets the name.
-//	 *
-//	 * @return the name
-//	 */
-//	public String getName() {
-//		return name;
-//	}
-	
+	public Product(Category category, String description, Double price, String iconPath) {
+		this.category = category;
+		this.description = description;
+		this.price = price;
+		this.iconName = iconPath;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public String getIconName() {
+		return iconName;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(description, price);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		final Product product = (Product) obj;
+		return Objects.equal(this.price, product.price)
+				&& Objects.equal(this.description, product.description);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this).add("Description", description)
+				.add("Price", price).toString();
+	}
 }

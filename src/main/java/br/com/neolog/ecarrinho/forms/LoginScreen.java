@@ -31,11 +31,8 @@ public class LoginScreen extends JFrame {
 	private JPasswordField passText;
 	
 	public LoginScreen() {
-		System.out.println(dao);
-
 		try {
-			new SwingEngine(this).render("swixml/LoginScreen.xml").setVisible(
-					true);
+			new SwingEngine(this).render("swixml/LoginScreen.xml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,8 +47,8 @@ public class LoginScreen extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			try
 			{
-				System.out.println("dao");
-				User user = dao.getUserbyUserName(userText.getText());
+				dao.save(new User("1", "2"));
+				User user = dao.get(userText.getText());
 				if( user.isValidPassword(String.valueOf(passText.getPassword())) )
 				{
 					System.out.println("usuario valido");

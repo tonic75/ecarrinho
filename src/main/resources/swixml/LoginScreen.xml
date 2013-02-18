@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<frame size="270,150" title="Hello SWIXML World"
+<frame size="270,150" title="Log in"
 	defaultCloseOperation="JFrame.EXIT_ON_CLOSE"
 	plaf="com.sun.java.swing.plaf.windows.WindowsLookAndFeel">
 
 	<panel constraints="BorderLayout.CENTER" Layout="GridBagLayout">
 		<label labelfor="user" font="Georgia-BOLD-12" foreground="blue"
-			text="Usuário:">
+			text="Usuário:" HorizontalAlignment="CENTER">
 			<gridbagconstraints gridx="0" gridy="0" />
 		</label>
 		<textfield id="userText" columns="20">
@@ -13,7 +13,7 @@
 		</textfield>
 
 		<label labelfor="pass" font="Georgia-BOLD-12" foreground="blue"
-			text="Senha:">
+			text="Senha:" HorizontalAlignment="CENTER">
 			<gridbagconstraints gridx="0" gridy="1" />
 		</label>
 		<passwordfield id="passText" columns="20">
