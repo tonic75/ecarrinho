@@ -16,6 +16,9 @@ public class Start {
 		
 		ProductsForm prod = (ProductsForm) contextoPrincipal.getBean("productsForm");
 		prod.loadAllProducts();
+		prod.setVisible(true);
+		//LoginScreen login = (LoginScreen) contextoPrincipal.getBean("loginScreen");
+		//login.setVisible(true);
 	}
 
 }

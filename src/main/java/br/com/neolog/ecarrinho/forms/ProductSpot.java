@@ -23,7 +23,7 @@ import com.jgoodies.forms.debug.FormDebugPanel;
  *
  */
 
-public class ProductSpace extends JPanel {
+public class ProductSpot extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -34,7 +34,7 @@ public class ProductSpace extends JPanel {
 	private JLabel description;
 	private JLabel iconLabel;
 
-	public ProductSpace( Product product ) throws HeadlessException {
+	public ProductSpot( Product product ) throws HeadlessException {
 		this.product = product;
 		
 		try {

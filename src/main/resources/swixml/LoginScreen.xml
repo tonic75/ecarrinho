@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<frame size="270,150" title="Log in"
-	defaultCloseOperation="JFrame.EXIT_ON_CLOSE"
+<panel size="270,150" title="Log in"
 	plaf="com.sun.java.swing.plaf.windows.WindowsLookAndFeel">
 
 	<panel constraints="BorderLayout.CENTER" Layout="GridBagLayout">
@@ -29,4 +28,4 @@
 			<gridbagconstraints gridx="0" gridy="2" />
 		</menuitem>
 	</panel>
-</frame>
+</panel>

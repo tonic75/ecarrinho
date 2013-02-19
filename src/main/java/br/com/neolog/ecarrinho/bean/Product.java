@@ -43,11 +43,11 @@ public class Product implements Persistable {
 	public Product() {
 	}
 
-	public Product(Category category, String description, Double price, String iconPath) {
+	public Product(Category category, String description, Double price, String iconName) {
 		this.category = category;
 		this.description = description;
 		this.price = price;
-		this.iconName = iconPath;
+		this.iconName = iconName;
 	}
 
 	public Long getId() {

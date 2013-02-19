@@ -27,11 +27,11 @@ public class CategoryProductDaoTest {
 	Category CATEGORY_1 = new Category("CATEGORY_1");
 	Category CATEGORY_2 = new Category("CATEGORY_2");
 	
-	Product PRODUCT_1 = new Product(CATEGORY_1, "description1", 100.100, "noImage.png");
-	Product PRODUCT_2 = new Product(CATEGORY_1, "description2", 200.200, "noImage.png");
-	Product PRODUCT_3 = new Product(CATEGORY_2, "description3", 300.300, "noImage.png");
-	Product PRODUCT_4 = new Product(CATEGORY_1, "description4", 400.400, "noImage.png");
-	Product PRODUCT_5 = new Product(CATEGORY_2, "description5", 500.500, "noImage.png");
+	Product PRODUCT_1 = new Product(CATEGORY_1, "description1", 100.100, "noIcon.png");
+	Product PRODUCT_2 = new Product(CATEGORY_1, "description2", 200.200, "noIcon.png");
+	Product PRODUCT_3 = new Product(CATEGORY_2, "description3", 300.300, "noIcon.png");
+	Product PRODUCT_4 = new Product(CATEGORY_1, "description4", 400.400, "noIcon.png");
+	Product PRODUCT_5 = new Product(CATEGORY_2, "description5", 500.500, "noIcon.png");
 	
 	List<Category> categories = new ImmutableList.Builder<Category>()
 			.add(CATEGORY_1)

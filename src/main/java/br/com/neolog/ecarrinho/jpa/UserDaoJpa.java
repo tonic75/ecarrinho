@@ -1,4 +1,4 @@
-package br.com.neolog.ecarrinho.dao;
+package br.com.neolog.ecarrinho.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -6,6 +6,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Component;
 
 import br.com.neolog.ecarrinho.bean.User;
+import br.com.neolog.ecarrinho.dao.UserDao;
 
 /**
  * @author antonio.moreira

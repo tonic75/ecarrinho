@@ -1,8 +1,9 @@
-package br.com.neolog.ecarrinho.dao;
+package br.com.neolog.ecarrinho.jpa;
 
 import org.springframework.stereotype.Component;
 
 import br.com.neolog.ecarrinho.bean.Category;
+import br.com.neolog.ecarrinho.dao.CategoryDao;
 
 /**
  * @author antonio.moreira

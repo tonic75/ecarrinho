@@ -2,7 +2,6 @@ package br.com.neolog.ecarrinho.forms;
 
 import java.awt.event.ActionEvent;
 
-import javax.persistence.NoResultException;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JFrame;
@@ -13,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.swixml.SwingEngine;
 
-import br.com.neolog.ecarrinho.bean.User;
-import br.com.neolog.ecarrinho.dao.UserDao;
+import br.com.neolog.ecarrinho.service.UserService;
 
 @Component
 public class LoginScreen extends JFrame {
@@ -23,16 +21,18 @@ public class LoginScreen extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Autowired
-	private UserDao dao;
+	private UserService userService;
 	
 	private JTextField userText;
 	private JPasswordField passText;
 	
 	public LoginScreen() {
+		setSize(270,150);
 		try {
-			new SwingEngine(this).render("swixml/LoginScreen.xml");
+			SwingEngine engine = new SwingEngine(this);
+			add(engine.render("swixml/LoginScreen.xml"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,23 +45,7 @@ public class LoginScreen extends JFrame {
 		private static final long serialVersionUID = -168221978922967631L;
 
 		public void actionPerformed(ActionEvent e) {
-			try
-			{
-				dao.save(new User("1", "2"));
-				User user = dao.get(userText.getText());
-				if( user.isValidPassword(String.valueOf(passText.getPassword())) )
-				{
-					System.out.println("usuario valido");
-				}
-				else
-				{
-					System.out.println("senha errada");
-				}
-			}
-			catch( NoResultException e1 )
-			{
-				System.out.println("usuario nao encontrado");
-			}	
+			System.out.println(userService.isValidPassword(userText.getText(), String.valueOf(passText.getPassword())));
 		}
 	};
 	

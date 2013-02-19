@@ -1,4 +1,4 @@
-package br.com.neolog.ecarrinho.dao;
+package br.com.neolog.ecarrinho.jpa;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.neolog.ecarrinho.dao.GenericDao;
 import br.com.neolog.ecarrinho.util.Persistable;
 
 // TODO: Auto-generated Javadoc
