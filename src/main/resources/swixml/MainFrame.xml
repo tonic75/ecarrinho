@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debugpanel>
-	<formlayout colspecs="800px" rowspecs="50px, f:500px:g" />
+	<formlayout colspecs="f:800px:g" rowspecs="50px, f:500px:g" />
 
 	<debugpanel>
-		<formlayout colspecs="200px, 600px:g" rowspecs="500px:g" />
+		<formlayout colspecs="200px, f:600px:g" rowspecs="f:500px:g" />
 		<cellconstraints gridX="1" gridY="2" />
 
+		<debugpanel id="categoriesContainer">
+			<cellconstraints gridX="1" gridY="1" />
+		</debugpanel>
+
+
 		<debugpanel>
-			<formlayout colspecs="600px:g" rowspecs="50px, 450px:g" />
+			<formlayout colspecs="f:600px:g" rowspecs="50px, f:10dlu:g" />
 			<cellconstraints gridX="2" gridY="1" />
-				<debugpanel >
-					<formlayout colspecs="600px:g" rowspecs="450px" />
-					<cellconstraints gridX="1" gridY="2" />
-						<panel id="productsPanelOut">
-							<formlayout colspecs="600px:g" rowspecs="450px" />
-							<cellconstraints gridX="1" gridY="1" />
-						</panel>
-				</debugpanel>
+			<debugpanel id="productsContainer" layout="borderlayout"
+				constraints="BorderLayout.CENTER">
+				<cellconstraints gridX="1" gridY="2" />
+			</debugpanel>
 		</debugpanel>
 
 	</debugpanel>

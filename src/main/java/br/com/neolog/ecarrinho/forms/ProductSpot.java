@@ -44,7 +44,6 @@ public class ProductSpot extends JPanel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		setSize(600,200);
 		loadProductData();
 	}
 	

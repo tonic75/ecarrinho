@@ -16,15 +16,21 @@ public class AddProducts {
 	@Autowired
 	CategoryDao categoryDao;
 	
-	Category CATEGORY_1 = new Category("CATEGORY_1");		
+		
 	
 	public void productPersistence()
 	{
-		categoryDao.save(CATEGORY_1);
+		Category CATEGORY_0 = new Category("CATEGORY_0");	
+		
+		categoryDao.save(CATEGORY_0);
+		for(int i = 1; i < 5; i++ )
+		{
+			categoryDao.save(new Category("category " + String.valueOf(i)));
+		}
 		
 		for(int i = 0; i < 20; i++ )
 		{
-			productDao.save(new Product(CATEGORY_1, "product" + String.valueOf(i), (double) i*100, "noIcon.png"));
+		//	productDao.save(new Product(CATEGORY_0, "product" + String.valueOf(i), (double) i*100, "noIcon.png"));
 		}
 	}
 }

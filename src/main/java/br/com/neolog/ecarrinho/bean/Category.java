@@ -1,5 +1,7 @@
 package br.com.neolog.ecarrinho.bean;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -14,6 +16,7 @@ import br.com.neolog.ecarrinho.util.Persistable;
  * The only field here is the name, that is also used as PK.
  */
 @Entity
+@Access(AccessType.FIELD)
 public class Category implements Persistable {
 	
 	@Id

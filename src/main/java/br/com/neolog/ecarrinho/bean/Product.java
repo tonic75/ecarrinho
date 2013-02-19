@@ -1,6 +1,9 @@
 package br.com.neolog.ecarrinho.bean;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,6 +20,7 @@ import com.google.common.base.Objects;
  *         description, price and its icon.
  */
 @Entity
+@Access(AccessType.FIELD)
 public class Product implements Persistable {
 
 	public static final String ICON_PATH = "src//main//resources//icon//";
@@ -25,7 +29,7 @@ public class Product implements Persistable {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Category category;
 
 	@Basic

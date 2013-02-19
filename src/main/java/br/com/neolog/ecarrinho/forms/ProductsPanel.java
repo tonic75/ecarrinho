@@ -1,6 +1,5 @@
 package br.com.neolog.ecarrinho.forms;
 
-import java.awt.FlowLayout;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -14,25 +13,23 @@ import br.com.neolog.ecarrinho.service.ProductService;
 import br.com.neolog.ecarrinho.util.WrapLayout;
 
 @Component
-public class ProductsPanel extends JPanel{
+public class ProductsPanel extends JScrollPane{
 	
 	@Autowired
 	ProductService productService;
 	
-	JPanel productsPanel;
+	JPanel panel;
 
 	private static final long serialVersionUID = 1L;
 	
 	public ProductsPanel()
 	{		
-		productsPanel = new JPanel(new WrapLayout(FlowLayout.LEFT));
+		//productsPanel = new JPanel(new WrapLayout());
+		//setSize(new Dimension(800,800));
+		panel = new JPanel(new WrapLayout());
+		setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
-		JScrollPane scroll = new JScrollPane();
-		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		
-		scroll.getViewport().add(productsPanel);
-		
-		add(scroll);
+		getViewport().add(panel);
 	}
 	
 	public void loadAllProducts()
@@ -40,7 +37,7 @@ public class ProductsPanel extends JPanel{
 		List<Product> allProducts = productService.getAllProducts();
 		for( Product prod : allProducts )
 		{
-			productsPanel.add(new ProductSpot(prod)); 
+			panel.add(new ProductSpot(prod));
 		}
 	}
 }

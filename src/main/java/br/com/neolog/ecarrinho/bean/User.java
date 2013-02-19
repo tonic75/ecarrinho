@@ -1,5 +1,7 @@
 package br.com.neolog.ecarrinho.bean;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,6 +16,7 @@ import com.google.common.base.Objects;
  * The Class User represents a user with his user name and password.
  */
 @Entity
+@Access(AccessType.FIELD)
 public class User implements Persistable {
 
 	@Id

@@ -23,6 +23,7 @@ public class Start {
 		//login.setVisible(true);
 		MainFrame main = (MainFrame) contextoPrincipal.getBean("mainFrame");
 		main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		main.inicialLoad();
 		main.setVisible(true);
 	}
 
