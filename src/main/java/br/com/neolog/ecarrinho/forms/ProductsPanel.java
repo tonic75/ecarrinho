@@ -3,7 +3,6 @@ package br.com.neolog.ecarrinho.forms;
 import java.awt.FlowLayout;
 import java.util.List;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -15,7 +14,7 @@ import br.com.neolog.ecarrinho.service.ProductService;
 import br.com.neolog.ecarrinho.util.WrapLayout;
 
 @Component
-public class ProductsForm extends JFrame{
+public class ProductsPanel extends JPanel{
 	
 	@Autowired
 	ProductService productService;
@@ -24,11 +23,8 @@ public class ProductsForm extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	
-	public ProductsForm()
-	{
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(800,600);
-		
+	public ProductsPanel()
+	{		
 		productsPanel = new JPanel(new WrapLayout(FlowLayout.LEFT));
 		
 		JScrollPane scroll = new JScrollPane();

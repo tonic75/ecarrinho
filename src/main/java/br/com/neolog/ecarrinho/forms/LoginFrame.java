@@ -15,7 +15,7 @@ import org.swixml.SwingEngine;
 import br.com.neolog.ecarrinho.service.UserService;
 
 @Component
-public class LoginScreen extends JFrame {
+public class LoginFrame extends JFrame {
 
 	/**
 	 * 
@@ -28,11 +28,11 @@ public class LoginScreen extends JFrame {
 	private JTextField userText;
 	private JPasswordField passText;
 	
-	public LoginScreen() {
+	public LoginFrame() {
 		setSize(270,150);
 		try {
 			SwingEngine engine = new SwingEngine(this);
-			add(engine.render("swixml/LoginScreen.xml"));
+			add(engine.render("swixml/"+this.getClass().getSimpleName()+".xml"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

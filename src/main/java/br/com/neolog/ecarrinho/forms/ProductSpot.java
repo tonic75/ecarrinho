@@ -40,7 +40,7 @@ public class ProductSpot extends JPanel {
 		try {
 			SwingEngine swingEngine = new SwingEngine(this);
 			swingEngine.getTaglib().registerTag("debugpanel", FormDebugPanel.class);
-			add(swingEngine.render("swixml/ProductSpace.xml"));
+			add(swingEngine.render("swixml/"+this.getClass().getSimpleName()+".xml"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
