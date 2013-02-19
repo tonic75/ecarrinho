@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<frame size="270,150" title="Hello SWIXML World"
-	defaultCloseOperation="JFrame.EXIT_ON_CLOSE"
+<panel size="270,150" title="Log in"
 	plaf="com.sun.java.swing.plaf.windows.WindowsLookAndFeel">
 
 	<panel constraints="BorderLayout.CENTER" Layout="GridBagLayout">
 		<label labelfor="user" font="Georgia-BOLD-12" foreground="blue"
-			text="Usuário:">
+			text="Usuário:" HorizontalAlignment="CENTER">
 			<gridbagconstraints gridx="0" gridy="0" />
 		</label>
-		<textfield id="user" columns="20">
+		<textfield id="userText" columns="20">
 			<gridbagconstraints gridx="1" gridy="0" />
 		</textfield>
 
 		<label labelfor="pass" font="Georgia-BOLD-12" foreground="blue"
-			text="Senha:">
+			text="Senha:" HorizontalAlignment="CENTER">
 			<gridbagconstraints gridx="0" gridy="1" />
 		</label>
-		<textfield id="pass" columns="20">
+		<passwordfield id="passText" columns="20">
 			<gridbagconstraints gridx="1" gridy="1" />
-		</textfield>
+		</passwordfield>
 	</panel>
 
 	<panel constraints="BorderLayout.SOUTH" layout="GridBagLayout">
@@ -29,4 +28,4 @@
 			<gridbagconstraints gridx="0" gridy="2" />
 		</menuitem>
 	</panel>
-</frame>
+</panel>
