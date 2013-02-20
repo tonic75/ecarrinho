@@ -15,12 +15,7 @@ public class Start {
 	public static void main(String[] args) {
 		AddProducts addProd = (AddProducts) contextoPrincipal.getBean("addProducts");
 		addProd.productPersistence();
-		
-		//ProductsForm prod = (ProductsForm) contextoPrincipal.getBean("productsFrame");
-		//prod.loadAllProducts();
-		//prod.setVisible(true);
-		//LoginScreen login = (LoginScreen) contextoPrincipal.getBean("loginFrame");
-		//login.setVisible(true);
+	
 		MainFrame main = (MainFrame) contextoPrincipal.getBean("mainFrame");
 		main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		main.inicialLoad();

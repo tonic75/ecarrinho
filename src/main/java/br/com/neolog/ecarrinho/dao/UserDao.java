@@ -5,6 +5,6 @@ import br.com.neolog.ecarrinho.bean.User;
 /**
  * @author antonio.moreira
  *
- * A interface for a generic dao for User.
+ * A interface for a generic DAO for User.
  */
-public interface UserDao extends GenericDao<User, String> {}
+public interface UserDao extends GenericDao<User, String> { }

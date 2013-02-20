@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<debugpanel id="outsidePanel">
-	<formlayout colspecs="10px, f:128px, 10px, l:140px:g"
-		rowspecs="8px, f:128px:n" />
+<panel id="outsidepanel" background="255,255,255">
+	<formlayout colspecs="128px, 10px, l:140px"
+		rowspecs="f:128px:n" />
 
 	<label id="iconLabel">
-		<cellconstraints gridX="2" gridY="2" />
+		<cellconstraints gridX="1" gridY="1" />
 	</label>
 
-	<debugpanel>
+	<panel>
 		<formlayout colspecs="140px" rowspecs="70px, 20px, 38px" />
-		<cellconstraints gridX="4" gridY="2" />
-		<label id="description" HorizontalAlignment="CENTER">
+		<cellconstraints gridX="3" gridY="1" />
+		<textarea id="description" HorizontalAlignment="CENTER" rows="4" editable="false" enabled="false" lineWrap="true">
+			<cellconstraints gridX="1" gridY="1" />
+		</textarea>
+
+		<panel background="255,255,255">
+		<formlayout colspecs="f:140px:g" rowspecs="f:20px:g" />
+			<cellconstraints gridX="1" gridY="2" />
+				<label id="price" HorizontalAlignment="CENTER" background="255,255,255">
 			<cellconstraints gridX="1" gridY="1" />
 		</label>
+		</panel>
 
-		<label id="price" HorizontalAlignment="CENTER">
-			<cellconstraints gridX="1" gridY="2" />
-		</label>
-
-		<debugpanel>
+		<panel background="255,255,255">
 			<formlayout colspecs="20px, 10px, 108px" rowspecs="38px" />
 			<cellconstraints gridX="1" gridY="3" />
 			<textfield id="qtd" text="1">
@@ -28,9 +32,9 @@
 				action="addToBasket">
 				<cellconstraints gridX="3" gridY="1" />
 			</button>
-		</debugpanel>
+		</panel>
 
-	</debugpanel>
+	</panel>
 
 
-</debugpanel>
+</panel>

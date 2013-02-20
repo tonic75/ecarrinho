@@ -15,11 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.neolog.ecarrinho.dao.GenericDao;
 import br.com.neolog.ecarrinho.util.Persistable;
 
-// TODO: Auto-generated Javadoc
 /**
  * @author antonio.moreira
  * 
- * Implentation of a generic dao with CRUD operations.
+ * Implementation of a generic DAO with CRUD operations.
  *
  * @param <T> The class that is going to be persisted
  * @param <U> The type of the PK
@@ -89,6 +88,4 @@ public abstract class GenericDaoJpa<T extends Persistable, U> implements Generic
 	public void delete(T object) {
 		entityManager.remove(entityManager.merge(object));		
 	}
-
-
 }

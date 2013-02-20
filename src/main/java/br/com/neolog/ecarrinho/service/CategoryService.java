@@ -14,6 +14,11 @@ public class CategoryService {
 	@Autowired
 	CategoryDao categoryDao;
 	
+	public Category getCategory( String categoryName )
+	{
+		return categoryDao.get(categoryName);
+	}
+	
 	public List<Category> getAllCategories()
 	{
 		return categoryDao.getAll();

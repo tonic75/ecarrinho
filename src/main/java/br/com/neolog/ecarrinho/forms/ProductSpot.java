@@ -1,6 +1,5 @@
 package br.com.neolog.ecarrinho.forms;
 
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -8,59 +7,79 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.swixml.SwingEngine;
 
+import br.com.neolog.ecarrinho.bean.Basket;
 import br.com.neolog.ecarrinho.bean.Product;
+import br.com.neolog.ecarrinho.start.Start;
 
 import com.jgoodies.forms.debug.FormDebugPanel;
 
 /**
- * 
+ * The Class ProductSpot.
  * 
  * @author antonio.moreira
- *
  */
 
 public class ProductSpot extends JPanel {
-	
 	private static final long serialVersionUID = 1L;
-	
+
 	private Product product;
-	
+
 	private JTextField qtd;
+
 	private JLabel price;
-	private JLabel description;
+
+	private JTextArea description;
+
 	private JLabel iconLabel;
 
-	public ProductSpot( Product product ) throws HeadlessException {
+	/**
+	 * Instantiates a new product spot.
+	 * 
+	 * @param product
+	 *            the product to be showed in this spot
+	 */
+	public ProductSpot(Product product) {
 		this.product = product;
-		
+
 		try {
 			SwingEngine swingEngine = new SwingEngine(this);
-			swingEngine.getTaglib().registerTag("debugpanel", FormDebugPanel.class);
-			add(swingEngine.render("swixml/"+this.getClass().getSimpleName()+".xml"));
+			swingEngine.getTaglib().registerTag("debugpanel",
+					FormDebugPanel.class);
+			add(swingEngine.render("swixml/" + this.getClass().getSimpleName()
+					+ ".xml"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		loadProductData();
 	}
-	
+
+	/** The action of the button that add a product to the basket. */
+	// TODO: complete it when it gets implemented
 	public Action addToBasket = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
-
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("adicionar ao carrinho");
-			System.out.println(qtd.getText());
-			iconLabel.setText("text");
+			if( Long.valueOf(qtd.getText()) > 0 ) 
+			{
+				Basket basket = (Basket) Start.contextoPrincipal.getBean("basket"); 
+				basket.addToBasket(product, Long.valueOf(qtd.getText()));
+				// TODO: verify if that are enough stock to execute the action
+			}
 		}
 	};
-	
-	public void loadProductData()
-	{
-		price.setText(product.getPrice().toString());
+
+	/**
+	 * Load product data to the swing components.
+	 */
+	public void loadProductData() {
+		price.setText("Preço: R$" + product.getPrice().toString());
 		description.setText(product.getDescription());
-		iconLabel.setIcon(new ImageIcon(Product.ICON_PATH + product.getIconName()));
+		iconLabel.setIcon(new ImageIcon(new ImageIcon(Product.ICON_PATH
+				+ product.getIconName()).getImage().getScaledInstance(128, 128,
+				java.awt.Image.SCALE_AREA_AVERAGING)));
 	}
 }

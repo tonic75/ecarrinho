@@ -5,9 +5,9 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import com.google.common.base.Objects;
-
 import br.com.neolog.ecarrinho.util.Persistable;
+
+import com.google.common.base.Objects;
 
 /**
  * @author antonio.moreira

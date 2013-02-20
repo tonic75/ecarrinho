@@ -27,7 +27,7 @@ public class ProductService {
 		return productDao.getAll();
 	}
 
-	public ArrayListMultimap<Category, Product> getAllProductsByCategory()
+	public Multimap<Category, Product> getAllProductsByCategory()
 	{
 		Multimap<Category, Product> map = ArrayListMultimap.create();
 		
@@ -39,6 +39,11 @@ public class ProductService {
 			}
 		}
 		
-		return null;
+		return map;
+	}
+	
+	public List<Product> getProductsByDescription( String description )
+	{
+		return productDao.getProductsByDescription(description);
 	}
 }

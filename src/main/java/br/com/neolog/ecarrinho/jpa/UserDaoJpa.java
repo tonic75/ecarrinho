@@ -11,7 +11,7 @@ import br.com.neolog.ecarrinho.dao.UserDao;
 /**
  * @author antonio.moreira
  *
- * The final dao for User.
+ * The final DAO for User.
  * Passes his type for GenericDaoJpa constructor.
  */
 @Component

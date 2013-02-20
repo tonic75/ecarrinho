@@ -3,7 +3,6 @@ package br.com.neolog.ecarrinho.bean;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -29,7 +28,7 @@ public class Product implements Persistable {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	private Category category;
 
 	@Basic

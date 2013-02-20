@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<debugpanel>
-	<formlayout colspecs="f:800px:g" rowspecs="50px, f:500px:g" />
+<panel>
+	<formlayout colspecs="f:300px:g" rowspecs="50px, f:300px:g" />
 
-	<debugpanel>
-		<formlayout colspecs="200px, f:600px:g" rowspecs="f:500px:g" />
+	<panel>
+		<formlayout colspecs="150px, f:500px:g" rowspecs="f:450px:g" />
 		<cellconstraints gridX="1" gridY="2" />
 
-		<debugpanel id="categoriesContainer">
-			<cellconstraints gridX="1" gridY="1" />
-		</debugpanel>
+		<scrollpane id="categoriesScroll">
+				<cellconstraints gridX="1" gridY="1" />
+		</scrollpane>
 
-
-		<debugpanel>
-			<formlayout colspecs="f:600px:g" rowspecs="50px, f:10dlu:g" />
+		<panel>
+			<formlayout colspecs="f:500px:g" rowspecs="50px, f:200px:g" />
 			<cellconstraints gridX="2" gridY="1" />
-			<debugpanel id="productsContainer" layout="borderlayout"
+			
+			<panel id="filterPanel">
+				<formlayout colspecs="c:115px, f:80px:g, 80px, 80px" rowspecs="50px:g" />
+				<cellconstraints gridX="1" gridY="1" />
+					<label text="Filtrar por descrição:">
+						<cellconstraints gridX="1" gridY="1" />
+					</label>
+					<textfield id="filterField">
+						<cellconstraints gridX="2" gridY="1" />
+					</textfield>
+					<button id="filterBtn" text="Filtrar" action="filter">
+						<cellconstraints gridX="3" gridY="1" />
+					</button>
+					<button id="cleanBtn" text="Limpar" action ="clean">
+						<cellconstraints gridX="4" gridY="1" />
+					</button>
+			</panel>
+			
+			<panel id="productsContainer" layout="borderlayout"
 				constraints="BorderLayout.CENTER">
 				<cellconstraints gridX="1" gridY="2" />
-			</debugpanel>
-		</debugpanel>
+			</panel>
+		</panel>
 
-	</debugpanel>
-</debugpanel>
+	</panel>
+</panel>
