@@ -24,7 +24,7 @@ import br.com.neolog.ecarrinho.dao.ProductDao;
 public class ProductDaoJpa extends GenericDaoJpa<Product, Long> implements ProductDao {
 
 	@PersistenceContext
-	EntityManager entityManager;
+	private EntityManager entityManager;
 
 	public ProductDaoJpa() {
 		super(Product.class);

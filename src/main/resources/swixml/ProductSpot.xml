@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <panel id="outsidepanel" background="255,255,255">
-	<formlayout colspecs="128px, 10px, l:140px"
-		rowspecs="f:128px:n" />
+	<formlayout colspecs="10px, 128px, 10px, l:140px"
+		rowspecs="8px, f:128px:n, 8px" />
 
 	<label id="iconLabel">
-		<cellconstraints gridX="1" gridY="1" />
+		<cellconstraints gridX="2" gridY="2" />
 	</label>
 
 	<panel>
 		<formlayout colspecs="140px" rowspecs="70px, 20px, 38px" />
-		<cellconstraints gridX="3" gridY="1" />
+		<cellconstraints gridX="4" gridY="2" />
 		<textarea id="description" HorizontalAlignment="CENTER" rows="4" editable="false" enabled="false" lineWrap="true">
 			<cellconstraints gridX="1" gridY="1" />
 		</textarea>
@@ -23,18 +23,15 @@
 		</panel>
 
 		<panel background="255,255,255">
-			<formlayout colspecs="20px, 10px, 108px" rowspecs="38px" />
+			<formlayout colspecs="8px, 20px, 10px, 92px, 8px" rowspecs="38px" />
 			<cellconstraints gridX="1" gridY="3" />
 			<textfield id="qtd" text="1">
-				<cellconstraints gridX="1" gridY="1" />
+				<cellconstraints gridX="2" gridY="1" />
 			</textfield>
 			<button name="addToBasketButton" id="addToBasketButton" text="Adicionar"
 				action="addToBasket">
-				<cellconstraints gridX="3" gridY="1" />
+				<cellconstraints gridX="4" gridY="1" />
 			</button>
 		</panel>
-
 	</panel>
-
-
 </panel>

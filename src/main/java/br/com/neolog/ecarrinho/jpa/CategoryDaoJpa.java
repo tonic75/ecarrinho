@@ -18,7 +18,7 @@ import br.com.neolog.ecarrinho.dao.CategoryDao;
 public class CategoryDaoJpa extends GenericDaoJpa<Category, String> implements CategoryDao {
 
 	@PersistenceContext
-	EntityManager entityManager;
+	private EntityManager entityManager;
 	
 	public CategoryDaoJpa() {
 		super(Category.class);

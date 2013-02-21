@@ -4,63 +4,69 @@ import java.awt.FlowLayout;
 import java.util.List;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.neolog.ecarrinho.bean.Product;
+import br.com.neolog.ecarrinho.service.BasketService;
 import br.com.neolog.ecarrinho.service.ProductService;
 import br.com.neolog.ecarrinho.util.WrapLayout;
 
 /**
- * The Class ProductsPanel.
- * This is a JScrollPane with a panel that holds products on it.
- * It can show all the products persisted or only a list of them.
- *
+ * The Class ProductsPanel. This is a JScrollPane with a panel that holds
+ * products on it. It can show all the products persisted or only a list of
+ * them.
+ * 
  * @author antonio.moreira
  */
 @Component
-public class ProductsPanel extends JScrollPane{
-	
-	@Autowired
-	ProductService productService;
+public class ProductsPanel extends JPanel {
 
-	JPanel panel;
+	@Autowired
+	private ProductService productService;
+
+	@Autowired
+	private BasketService basketService;
+
+	// this is here to update do basket screen when a user add a product there
+	// with the screen opened
+	@Autowired
+	private ProductsOnBasketHolder productsOnBasketHolder;
 
 	private static final long serialVersionUID = 1L;
-	
-	public ProductsPanel()
-	{		
-		panel = new JPanel(new WrapLayout(FlowLayout.LEFT,0,0));
-		
-		setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		getViewport().add(panel);
+
+	public ProductsPanel() {
+		this.setLayout(new WrapLayout(FlowLayout.LEFT, 0, 0));
 	}
-	
+
 	/**
 	 * Load all products persisted.
 	 */
-	public void loadAllProducts()
-	{
-		panel.removeAll();
+	public void loadProducts() {
 		List<Product> allProducts = productService.getAllProducts();
-		for( Product product : allProducts )
-		{
-			panel.add(new ProductSpot(product));
-		}
+		addProducts(allProducts);
 	}
-	
+
 	/**
 	 * Load a list of products.
-	 *
-	 * @param products the products to be showed
+	 * 
+	 * @param products
+	 *            the products to be showed
 	 */
-	public void loadListProducts( List<Product> products )
-	{
-		panel.removeAll();
+	public void loadProducts(List<Product> products) {
+		addProducts(products);
+	}
+
+	private void addProducts(List<Product> products) {
+		removeAll();
 		for (Product product : products) {
-			panel.add(new ProductSpot(product));
-		}		
+			add(new ProductSpot(product, this));
+		}
+	}
+
+	public void addToBasket(Product product, Long amount) {
+		basketService.addToBasket(product, amount);
+		productsOnBasketHolder.refreshBasket();
 	}
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debugpanel>
+<formlayout colspecs="f:300px:g" rowspecs="f:30px:g, f:30px" />
+	
+	<scrollpane id="productsContainer">
+				<cellconstraints gridX="1" gridY="1" />	
+	</scrollpane>
+	
+	<debugpanel>
+		<formlayout colspecs="f:30px:g, c:90px, f:80px, 10px" rowspecs="f:30px" />
+		<cellconstraints gridX="1" gridY="2" />
+		
+		<label text="Valor total:">
+			<cellconstraints gridX="2" gridY="1" />
+		</label>	
+		<textfield id="totalValue" editable="false" background="255,255,255">
+			<cellconstraints gridX="3" gridY="1" />
+		</textfield>
+	</debugpanel>
+	
+</debugpanel>

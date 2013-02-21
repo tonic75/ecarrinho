@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <panel>
-	<formlayout colspecs="f:300px:g" rowspecs="50px, f:300px:g" />
+	<formlayout colspecs="f:300px:g" rowspecs="35px, f:300px:g" />
+
+	<panel id="basketLoginPanel">
+		<formlayout colspecs="10px, c:100px, 30px:g, c:80px, c:80px, 10px" rowspecs="5px, 25px:g, 5px" />
+		<cellconstraints gridX="1" gridY="1" />
+	
+		<button text="Carrinho" action="showBasket">
+			<cellconstraints gridX="2" gridY="2" />
+		</button>
+	</panel>
 
 	<panel>
-		<formlayout colspecs="150px, f:500px:g" rowspecs="f:450px:g" />
+		<formlayout colspecs="130px, f:500px:g" rowspecs="f:450px:g" />
 		<cellconstraints gridX="1" gridY="2" />
 
 		<scrollpane id="categoriesScroll">
@@ -31,10 +40,9 @@
 					</button>
 			</panel>
 			
-			<panel id="productsContainer" layout="borderlayout"
-				constraints="BorderLayout.CENTER">
+			<scrollpane id="productsContainer">
 				<cellconstraints gridX="1" gridY="2" />
-			</panel>
+			</scrollpane>
 		</panel>
 
 	</panel>

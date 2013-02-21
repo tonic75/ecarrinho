@@ -12,9 +12,8 @@ import javax.swing.JTextField;
 
 import org.swixml.SwingEngine;
 
-import br.com.neolog.ecarrinho.bean.Basket;
+
 import br.com.neolog.ecarrinho.bean.Product;
-import br.com.neolog.ecarrinho.start.Start;
 
 import com.jgoodies.forms.debug.FormDebugPanel;
 
@@ -36,6 +35,8 @@ public class ProductSpot extends JPanel {
 	private JTextArea description;
 
 	private JLabel iconLabel;
+	
+	private ProductsPanel productsPanel;
 
 	/**
 	 * Instantiates a new product spot.
@@ -43,8 +44,9 @@ public class ProductSpot extends JPanel {
 	 * @param product
 	 *            the product to be showed in this spot
 	 */
-	public ProductSpot(Product product) {
+	public ProductSpot(Product product, ProductsPanel productsPanel ) {
 		this.product = product;
+		this.productsPanel = productsPanel; 
 
 		try {
 			SwingEngine swingEngine = new SwingEngine(this);
@@ -65,8 +67,7 @@ public class ProductSpot extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if( Long.valueOf(qtd.getText()) > 0 ) 
 			{
-				Basket basket = (Basket) Start.contextoPrincipal.getBean("basket"); 
-				basket.addToBasket(product, Long.valueOf(qtd.getText()));
+				productsPanel.addToBasket(product, Long.valueOf(qtd.getText()));
 				// TODO: verify if that are enough stock to execute the action
 			}
 		}
@@ -75,7 +76,7 @@ public class ProductSpot extends JPanel {
 	/**
 	 * Load product data to the swing components.
 	 */
-	public void loadProductData() {
+	private void loadProductData() {
 		price.setText("Preço: R$" + product.getPrice().toString());
 		description.setText(product.getDescription());
 		iconLabel.setIcon(new ImageIcon(new ImageIcon(Product.ICON_PATH

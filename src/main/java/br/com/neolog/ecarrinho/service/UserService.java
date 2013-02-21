@@ -12,13 +12,25 @@ import br.com.neolog.ecarrinho.dao.UserDao;
 public class UserService {
 	
 	@Autowired
-	private UserDao dao;
+	private UserDao userDao;
+	
+	public void registerUser(User user)
+	{
+		if( user.isValidUser() )
+		{
+			userDao.save(user);
+		}
+		else
+		{
+			throw new IllegalArgumentException();
+		}
+	}
 	
 	public boolean isValidPassword( String userName, String pass )
 	{
 		try
 		{
-			User user = dao.get(userName);
+			User user = userDao.get(userName);
 			if( user.isValidPassword(String.valueOf(pass)) )
 			{
 				return true;

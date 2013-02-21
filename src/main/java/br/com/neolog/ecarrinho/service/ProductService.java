@@ -17,10 +17,10 @@ import com.google.common.collect.Multimap;
 public class ProductService {
 	
 	@Autowired
-	ProductDao productDao;
+	private ProductDao productDao;
 	
 	@Autowired
-	CategoryDao categoryDao;
+	private CategoryDao categoryDao;
 	
 	public List<Product> getAllProducts()
 	{

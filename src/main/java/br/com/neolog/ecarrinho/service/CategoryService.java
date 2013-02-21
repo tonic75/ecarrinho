@@ -12,7 +12,7 @@ import br.com.neolog.ecarrinho.dao.CategoryDao;
 public class CategoryService {
 	
 	@Autowired
-	CategoryDao categoryDao;
+	private CategoryDao categoryDao;
 	
 	public Category getCategory( String categoryName )
 	{

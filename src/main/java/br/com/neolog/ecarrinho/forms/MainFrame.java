@@ -9,6 +9,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -28,27 +29,39 @@ import br.com.neolog.ecarrinho.service.ProductService;
 
 import com.google.common.collect.Multimap;
 import com.jgoodies.forms.debug.FormDebugPanel;
+import com.jgoodies.forms.layout.CellConstraints;
 
 @Component
 public class MainFrame extends JFrame implements ListSelectionListener{
 	private static final long serialVersionUID = 1L;
 	
-	DefaultListModel categoriesListModel = new DefaultListModel();
-	JList categoriesList = new JList(categoriesListModel);
-	JScrollPane categoriesScroll;
-	JPanel categoriesContainer = new JPanel();
-	JPanel productsContainer;
-	JPanel filterPanel;
-	JTextField filterField;
+	private DefaultListModel categoriesListModel = new DefaultListModel();
+	private JList categoriesList = new JList(categoriesListModel);
+	private JScrollPane categoriesScroll;
+	private JPanel categoriesContainer = new JPanel();
+	private JScrollPane productsContainer;
+	private JPanel filterPanel;
+	private JTextField filterField;
+	private JPanel basketLoginPanel;
+	private JButton logInBtn = new JButton("Entrar");
+	private JButton registerBtn = new JButton("Registrar");
 	
-	Multimap<Category, Product> productsByCategoryMap;
+	private CellConstraints cc = new CellConstraints();
+	
+	private Multimap<Category, Product> productsByCategoryMap;
 	
 	@Autowired
-	ProductsPanel productsPanel;
+	private BasketFrame basketPanel;
 	@Autowired
-	ProductService productService;
+	private ProductsPanel productsPanel;
 	@Autowired
-	CategoryService categoryService;
+	private LoginFrame loginFrame;
+	@Autowired
+	private RegisterFrame registerFrame;
+	@Autowired
+	private ProductService productService;
+	@Autowired
+	private CategoryService categoryService;
 
 	public MainFrame()
 	{
@@ -75,32 +88,48 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 		productsByCategoryMap = productService.getAllProductsByCategory();
 		loadProducts();
 		loadCategories();
+		putActionsOnButtons();
+		updateUiSessionStatus();
+		basketPanel.initialize();
 	}
 	
-	public void loadProducts()
+	private void loadProducts()
 	{
-		productsPanel.loadAllProducts();
-		productsContainer.add(productsPanel);
+		productsPanel.loadProducts();
+		productsContainer.getViewport().add(productsPanel);
 	}
 	
-	public void loadCategories()
+	private void loadCategories()
 	{
 		List<Category> categories = categoryService.getAllCategories();
-		categoriesListModel.add(0, "Todas as categorias");
+		categoriesListModel.add(0, "Todas os produtos");
 		for (Category category : categories) {
 			categoriesListModel.addElement(category.getName());
 		}
 	}
 
+	public void updateUiSessionStatus()
+	{
+		// TODO: SESSION!
+		basketLoginPanel.add(logInBtn, cc.xy(4,2));
+		basketLoginPanel.add(registerBtn, cc.xy(5,2));
+	}
+	
+	public void putActionsOnButtons()
+	{
+		logInBtn.addActionListener(logIn);
+		registerBtn.addActionListener(register);
+	}
+	
 	public void valueChanged(ListSelectionEvent e) {
 		filterByCategory();
 	}
 	
-	public void filterByCategory()
+	private void filterByCategory()
 	{
 		if( categoriesList.getSelectedIndex() == 0 )
 		{
-			productsPanel.loadAllProducts();
+			productsPanel.loadProducts();
 		}
 		else
 		{
@@ -109,16 +138,16 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 		refreshUI();
 	}
 	
-	public void loadProductsByCategory(String categoryName)
+	private void loadProductsByCategory(String categoryName)
 	{
 		List<Product> products = (List<Product>) productsByCategoryMap.get(categoryService.getCategory(categoryName));
-		productsPanel.loadListProducts(products);
+		productsPanel.loadProducts(products);
 	}
 	
 	public Action filter = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
-			productsPanel.loadListProducts(productService.getProductsByDescription( filterField.getText() ));
+			productsPanel.loadProducts(productService.getProductsByDescription( filterField.getText() ));
 			refreshUI();
 		}
 	};
@@ -132,9 +161,28 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 		}
 	};
 	
+	public Action showBasket = new AbstractAction() {
+		private static final long serialVersionUID = 1L;
+		public void actionPerformed(ActionEvent e) {
+			basketPanel.setVisible(true);
+		}
+	};
 	
+	public Action logIn = new AbstractAction() {
+		private static final long serialVersionUID = 1L;
+		public void actionPerformed(ActionEvent e) {
+			loginFrame.setVisible(true);
+		}
+	};
 	
-	public void refreshUI()
+	public Action register = new AbstractAction() {
+		private static final long serialVersionUID = 1L;
+		public void actionPerformed(ActionEvent e) {
+			registerFrame.setVisible(true);
+		}
+	};
+	
+	private void refreshUI()
 	{
 		validate();
 		repaint();
