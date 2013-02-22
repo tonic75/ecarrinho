@@ -3,7 +3,6 @@ package br.com.neolog.ecarrinho.jpa;
 import br.com.neolog.ecarrinho.bean.Acquisition;
 import br.com.neolog.ecarrinho.dao.AcquisitionDao;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AquisitionDaoJpa.
  * 

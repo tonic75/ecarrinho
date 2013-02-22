@@ -33,10 +33,16 @@ public class User implements Persistable {
 
 	@Basic
 	private String cardNumber;
+	
+	@Basic
+	private String agency;
+	
+	@Basic
+	private String accNumber;
 
 	@Basic
 	private String CPF;
-
+	
 	/**
 	 * Empty private default constructor for hibernate.
 	 */
@@ -59,17 +65,44 @@ public class User implements Persistable {
 	}
 
 	public User(String user, String pass, String name, String address,
-			String cardNumber, String CPF) {
+			String cardNumber, String agency, String accNumber, String CPF) {
 		this.user = user;
 		this.pass = pass;
 		this.name = name;
 		this.address = address;
 		this.cardNumber = cardNumber;
+		this.agency = agency;
+		this.accNumber = accNumber;
 		this.CPF = CPF;
 	}
 
 	public String getUser() {
 		return user;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public String getAddress()
+	{
+		return address;
+	}
+	
+	public String getCard()
+	{
+		return cardNumber;
+	}
+	
+	public String getAgency()
+	{
+		return agency;
+	}
+	
+	public String getAcc()
+	{
+		return accNumber;
 	}
 
 	/**

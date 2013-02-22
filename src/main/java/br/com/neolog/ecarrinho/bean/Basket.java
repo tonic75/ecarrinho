@@ -4,23 +4,25 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.Basic;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import org.springframework.stereotype.Component;
 
 import com.google.common.base.Objects;
 
-@Component
 @Entity
+@Access(AccessType.FIELD)
 public class Basket {
 
 	@Id
+	@GeneratedValue
 	private Long id;
 	
-	@Basic
-	private HashMap<Product, Long> products = new HashMap<Product, Long>();
+	@ElementCollection
+	private Map<Product, Long> products = new HashMap<Product, Long>();
 	
 	public Map<Product, Long> getBasket()
 	{
@@ -68,6 +70,20 @@ public class Basket {
 		{
 			throw new IllegalArgumentException();
 		}
+	}
+	
+	public double getTotalValue()
+	{
+		double totalValue = 0;
+		for (Product product : products.keySet()) {
+			totalValue += product.getPrice()*products.get(product);
+		}
+		return totalValue;
+	}
+	
+	public Map<Product, Long> getProducts()
+	{
+		return Collections.unmodifiableMap(products);
 	}
 	
 	/* (non-Javadoc)

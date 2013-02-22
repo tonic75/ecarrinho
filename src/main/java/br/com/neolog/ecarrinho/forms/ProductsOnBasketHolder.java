@@ -20,7 +20,7 @@ public class ProductsOnBasketHolder extends JPanel {
 	@Autowired
 	private BasketService basketService;
 	
-	JTextField totalValue;
+	private JTextField totalValue;
 	
 	public ProductsOnBasketHolder()
 	{
@@ -30,7 +30,7 @@ public class ProductsOnBasketHolder extends JPanel {
 	public void refreshBasket()
 	{
 		removeAll();
-		Map<Product, Long> productsOnBasket = basketService.getBasket();
+		Map<Product, Long> productsOnBasket = basketService.getProducts();
 		refreshProducts(productsOnBasket);
 		refreshTotalValue(productsOnBasket);
 		validate();
@@ -47,11 +47,7 @@ public class ProductsOnBasketHolder extends JPanel {
 	
 	private void refreshTotalValue( Map<Product, Long> productsOnBasket )
 	{
-		double totalValue = 0;
-		for (Product product : productsOnBasket.keySet()) {
-			totalValue += product.getPrice()*productsOnBasket.get(product);
-		}
-		this.totalValue.setText(String.valueOf(totalValue));
+		totalValue.setText(String.valueOf(basketService.getTotalValue()));
 	}
 	
 	public void changeAmount(Product product,Long newAmount)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <panel background="255,255,255">
-	<formlayout colspecs="5px, l:60px, f:200px,15px" rowspecs="5px,f:20px,5px,f:20px,5px,f:20px,5px,f:20px,5px,f:20px,5px,f:20px,10px,25px" />
+	<formlayout colspecs="5px, l:60px, f:200px,15px" rowspecs="5px,f:20px,5px,f:20px,5px,f:20px,5px,f:20px,5px,f:20px,5px,f:20px,5px,f:20px,5px,f:20px,10px,25px" />
 	<label text="Nome:">
 		<cellconstraints gridX="2" gridY="2" />
 	</label>
@@ -29,23 +29,37 @@
 		<cellconstraints gridX="3" gridY="8" />
 	</textfield>
 	
-	<label text="Usuário:">
+	<label text="Agência:">
 		<cellconstraints gridX="2" gridY="10" />
 	</label>
-	<textfield id="userField">
+	<textfield id="agencyField">
 		<cellconstraints gridX="3" gridY="10" />
 	</textfield>
 	
-	<label text="Senha:">
+	<label text="Conta:">
 		<cellconstraints gridX="2" gridY="12" />
 	</label>
-	<passwordfield id="passField">
+	<textfield id="accField">
 		<cellconstraints gridX="3" gridY="12" />
+	</textfield>
+	
+	<label text="Usuário:">
+		<cellconstraints gridX="2" gridY="14" />
+	</label>
+	<textfield id="userField">
+		<cellconstraints gridX="3" gridY="14" />
+	</textfield>
+	
+	<label text="Senha:">
+		<cellconstraints gridX="2" gridY="16" />
+	</label>
+	<passwordfield id="passField">
+		<cellconstraints gridX="3" gridY="16" />
 	</passwordfield>
 	
 	<panel background="255,255,255">
-	<formlayout colspecs="95px,10px,95px" rowspecs="25px" />
-	<cellconstraints gridX="3" gridY="14"  />
+		<formlayout colspecs="95px,10px,95px" rowspecs="25px" />
+		<cellconstraints gridX="3" gridY="18"  />
 		<button text="Registrar" action="register">
 			<cellconstraints gridX="1" gridY="1" />
 		</button>

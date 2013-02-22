@@ -1,6 +1,8 @@
 package br.com.neolog.ecarrinho.forms;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.swixml.SwingEngine;
 
 import br.com.neolog.ecarrinho.bean.User;
+import br.com.neolog.ecarrinho.service.SessionService;
 import br.com.neolog.ecarrinho.service.UserService;
 
 import com.jgoodies.forms.debug.FormDebugPanel;
@@ -24,11 +27,20 @@ public class RegisterFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
+	
+	@Autowired
+	private SessionService session;
+	
+	@Autowired
+	private MainFrame mainFrame;
+	
 	private JTextField nameField;
 	private JTextField adsressField;
 	private JTextField cpfField;
 	private JTextField cardField;
+	private JTextField agencyField;
+	private JTextField accField;
 	private JTextField userField;
 	private JPasswordField passField;
 
@@ -42,8 +54,15 @@ public class RegisterFrame extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
+				mainFrame.setVisible(true);
+			}
+		});
 		setResizable(false);
-		setSize(276, 217);
+		setSize(276, 267);
 	}
 
 	public Action register = new AbstractAction() {
@@ -53,12 +72,17 @@ public class RegisterFrame extends JFrame {
 			try {
 				userService.registerUser(new User(userField.getText(), String
 						.valueOf(passField.getPassword()), nameField.getText(),
-						adsressField.getText(), cardField.getText(), cpfField
+						adsressField.getText(), cardField.getText(), agencyField.getText(), accField.getText(), cpfField
 								.getText()));
 
 				JOptionPane.showMessageDialog(getParent(),
 						"Usuário cadastrado", "Sucesso",
 						JOptionPane.INFORMATION_MESSAGE);
+				
+				session.logIn(userService.getUser(userField.getText()));
+				setVisible(false);
+				mainFrame.setVisible(true);
+				
 			} catch (IllegalArgumentException e1) {
 				JOptionPane.showMessageDialog(getParent(),
 						"Dados de usuário incompletos", "Erro",
@@ -73,9 +97,9 @@ public class RegisterFrame extends JFrame {
 
 	public Action cancel = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
-
 		public void actionPerformed(ActionEvent e) {
 			setVisible(false);
+			mainFrame.setVisible(true);
 		}
 	};
 	
@@ -92,6 +116,8 @@ public class RegisterFrame extends JFrame {
 		adsressField.setText("");
 		cpfField.setText("");
 		cardField.setText("");
+		agencyField.setText("");
+		accField.setText("");
 		userField.setText("");
 		passField.setText("");
 	}

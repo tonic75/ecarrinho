@@ -19,7 +19,7 @@ public class BasketFrame extends JFrame {
 	@Autowired
 	private ProductsOnBasketHolder productsOnBasketHolder;
 	
-	JTextField totalValue;
+	private JTextField totalValue;
 	
 	public BasketFrame() {
 		try {

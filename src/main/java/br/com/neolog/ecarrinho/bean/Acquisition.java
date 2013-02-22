@@ -19,16 +19,13 @@ import com.google.common.base.Objects;
 @Entity
 public class Acquisition implements Persistable{
 
-	/** The id. */
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-	/** The product. */
 	@ManyToOne
 	private Product product;
 	
-	/** The amount. */
 	@Basic
 	private Long amount;
 	

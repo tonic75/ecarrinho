@@ -1,10 +1,13 @@
 package br.com.neolog.ecarrinho.forms;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -12,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.swixml.SwingEngine;
 
+import br.com.neolog.ecarrinho.service.SessionService;
 import br.com.neolog.ecarrinho.service.UserService;
 
 /**
@@ -27,6 +31,15 @@ public class LoginFrame extends JFrame {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RegisterFrame registerFrame;
+	
+	@Autowired
+	private SessionService session;
+	
+	@Autowired
+	private MainFrame mainFrame;
 
 	private JTextField userText;
 
@@ -41,6 +54,13 @@ public class LoginFrame extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
+				mainFrame.setVisible(true);
+			}
+		});
 	}
 
 	/**
@@ -53,8 +73,22 @@ public class LoginFrame extends JFrame {
 		private static final long serialVersionUID = -168221978922967631L;
 
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(userService.isValidPassword(userText.getText(),
-					String.valueOf(passText.getPassword())));
+			if((userService.isValidPassword(userText.getText(),
+					String.valueOf(passText.getPassword()))))
+			{
+				session.logIn(userService.getUser(userText.getText()));
+				JOptionPane.showMessageDialog(getParent(),
+						"Bem vindo, " + userText.getText(), ":)",
+						JOptionPane.INFORMATION_MESSAGE);
+				setVisible(false);
+				mainFrame.setVisible(true);
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(getParent(),
+						"Dados incorretos", "Erro",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	};
 
@@ -62,13 +96,21 @@ public class LoginFrame extends JFrame {
 	 * Captures the action of registering a new user and calls the frame that
 	 * does it.
 	 */
-	// TODO: complete it when it gets implemented
 	public Action newUser = new AbstractAction() {
 		private static final long serialVersionUID = -9198682512676260864L;
 
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("ahala papiu");
+			setVisible(false);
+			registerFrame.setVisible(true);
 		}
 	};
+	
+	@Override
+	public void setVisible( boolean aFlag )
+	{
+		super.setVisible(aFlag);
+	}
+	
+	
 
 }

@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,10 +27,11 @@ import br.com.neolog.ecarrinho.bean.Category;
 import br.com.neolog.ecarrinho.bean.Product;
 import br.com.neolog.ecarrinho.service.CategoryService;
 import br.com.neolog.ecarrinho.service.ProductService;
+import br.com.neolog.ecarrinho.service.SessionService;
+import br.com.neolog.ecarrinho.util.JFrameAspectAdapter;
 
 import com.google.common.collect.Multimap;
 import com.jgoodies.forms.debug.FormDebugPanel;
-import com.jgoodies.forms.layout.CellConstraints;
 
 @Component
 public class MainFrame extends JFrame implements ListSelectionListener{
@@ -43,10 +45,13 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 	private JPanel filterPanel;
 	private JTextField filterField;
 	private JPanel basketLoginPanel;
-	private JButton logInBtn = new JButton("Entrar");
-	private JButton registerBtn = new JButton("Registrar");
+	private JButton logInBtn;
+	private JButton registerBtn;
+	private JLabel userName;
+	private JButton exitBtn;
 	
-	private CellConstraints cc = new CellConstraints();
+	@Autowired
+	JFrameAspectAdapter aspectAdapter;
 	
 	private Multimap<Category, Product> productsByCategoryMap;
 	
@@ -59,9 +64,13 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 	@Autowired
 	private RegisterFrame registerFrame;
 	@Autowired
+	private PaymentFrame paymentFrame;
+	@Autowired
 	private ProductService productService;
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private SessionService session;
 
 	public MainFrame()
 	{
@@ -81,6 +90,8 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 		categoriesScroll.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		filterPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		basketLoginPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 	
 	public void inicialLoad()
@@ -88,7 +99,6 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 		productsByCategoryMap = productService.getAllProductsByCategory();
 		loadProducts();
 		loadCategories();
-		putActionsOnButtons();
 		updateUiSessionStatus();
 		basketPanel.initialize();
 	}
@@ -110,17 +120,23 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 
 	public void updateUiSessionStatus()
 	{
-		// TODO: SESSION!
-		basketLoginPanel.add(logInBtn, cc.xy(4,2));
-		basketLoginPanel.add(registerBtn, cc.xy(5,2));
+		if(session.getLoggedUser() == null)
+		{
+			userName.setVisible(false);
+			exitBtn.setVisible(false);
+			logInBtn.setVisible(true);
+			registerBtn.setVisible(true);
+		}
+		else
+		{
+			logInBtn.setVisible(false);
+			registerBtn.setVisible(false);
+			userName.setText(session.getLoggedUser().getName());
+			userName.setVisible(true);
+			exitBtn.setVisible(true);
+		}
 	}
-	
-	public void putActionsOnButtons()
-	{
-		logInBtn.addActionListener(logIn);
-		registerBtn.addActionListener(register);
-	}
-	
+
 	public void valueChanged(ListSelectionEvent e) {
 		filterByCategory();
 	}
@@ -171,6 +187,7 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 	public Action logIn = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
+			setVisible(false);
 			loginFrame.setVisible(true);
 		}
 	};
@@ -178,9 +195,39 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 	public Action register = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
+			setVisible(false);
 			registerFrame.setVisible(true);
 		}
 	};
+	
+	public Action exit = new AbstractAction() {
+		private static final long serialVersionUID = 1L;
+		public void actionPerformed(ActionEvent e) {
+			session.LogOut();
+			updateUiSessionStatus();
+		}
+	};
+	
+	public Action finalizeBuy = new AbstractAction() {
+		private static final long serialVersionUID = 1L;
+		public void actionPerformed(ActionEvent e) {
+			finalizeBuy();
+		}
+	};
+	
+	public void finalizeBuy()
+	{
+		aspectAdapter.windowCaller(paymentFrame);
+		setVisible(false);
+		paymentFrame.setVisible(true);
+	}
+	
+	@Override
+	public void setVisible( boolean aFlag )
+	{
+		updateUiSessionStatus();
+		super.setVisible(aFlag);
+	}
 	
 	private void refreshUI()
 	{

@@ -3,11 +3,35 @@
 	<formlayout colspecs="f:300px:g" rowspecs="35px, f:300px:g" />
 
 	<panel id="basketLoginPanel">
-		<formlayout colspecs="10px, c:100px, 30px:g, c:80px, c:80px, 10px" rowspecs="5px, 25px:g, 5px" />
+		<formlayout colspecs="10px, f:80px, f:80px, c:30px:g, f:80px, f:80px, 10px" rowspecs="5px, 25px:g, 5px" />
 		<cellconstraints gridX="1" gridY="1" />
 	
 		<button text="Carrinho" action="showBasket">
 			<cellconstraints gridX="2" gridY="2" />
+		</button>
+		
+		<button text="Comprar" action="finalizeBuy">
+			<cellconstraints gridX="3" gridY="2" />
+		</button>
+		
+		<label id="storeName" text="E-Carrinho, sua loja virtual preferida" font="Georgia-BOLD-12" foreground="blue">
+			<cellconstraints gridX="4" gridY="2" />
+		</label>
+		
+		<button id="logInBtn" text="Entrar" action="logIn">
+			<cellconstraints gridX="5" gridY="2" />
+		</button>
+		
+		<button id ="registerBtn" text="Registrar" action="register">
+			<cellconstraints gridX="6" gridY="2" />
+		</button>
+		
+		<label id="userName">
+			<cellconstraints gridX="5" gridY="2" />
+		</label>
+		
+		<button id ="exitBtn" text="Sair" action="exit">
+			<cellconstraints gridX="6" gridY="2" />
 		</button>
 	</panel>
 
@@ -24,7 +48,7 @@
 			<cellconstraints gridX="2" gridY="1" />
 			
 			<panel id="filterPanel">
-				<formlayout colspecs="c:115px, f:80px:g, 80px, 80px" rowspecs="50px:g" />
+				<formlayout colspecs="c:115px, f:80px:g, 80px, 80px, 10px" rowspecs="50px:g" />
 				<cellconstraints gridX="1" gridY="1" />
 					<label text="Filtrar por descrição:">
 						<cellconstraints gridX="1" gridY="1" />

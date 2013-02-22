@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel id="ousidePanel" background="255,255,255">
+	<formlayout colspecs="5px, l:60px, f:200px" rowspecs="5px,f:20px,5px,f:60px,5px,f:20px,5px,f:20px,5px,f:20px,10px,25px" />
+	<label text="Total:">
+		<cellconstraints gridX="2" gridY="2" />
+	</label>
+	<textfield id="totalField" editable="false">
+		<cellconstraints gridX="3" gridY="2" />
+	</textfield>
+	<label text="Endereço:">
+		<cellconstraints gridX="2" gridY="4" />
+	</label>
+	<textarea id="addressArea" rows="3" lineWrap="true">
+		<cellconstraints gridX="3" gridY="4" />
+	</textarea>
+	<label text="Forma de pag.:" >
+		<cellconstraints gridX="2" gridY="6" />
+	</label>
+	<!-- 
+	<combobox id="paymentMethods">
+		<cellconstraints gridX="3" gridY="6" />
+	</combobox>
+	 -->
+	<label id="cardAgencyLabel">
+		<cellconstraints gridX="2" gridY="8" />
+	</label>
+	<textfield id="cardField">
+		<cellconstraints gridX="3" gridY="8" />
+	</textfield>
+	<textfield id="agencyField" text="agencia">
+		<cellconstraints gridX="3" gridY="8" />
+	</textfield>
+	<label id="accLabel" text="Conta:">
+		<cellconstraints gridX="2" gridY="10" />
+	</label>
+	<textfield id="accField">
+		<cellconstraints gridX="3" gridY="10" />
+	</textfield>
+	
+	<panel background="255,255,255">
+		<formlayout colspecs="95px,10px,95px" rowspecs="25px" />
+		<cellconstraints gridX="3" gridY="12"  />
+		<button text="Confirmar" action="confirm">
+			<cellconstraints gridX="1" gridY="1" />
+		</button>
+		<button text="Cancelar" action="cancel">
+			<cellconstraints gridX="3" gridY="1" />
+		</button>
+	</panel>
+	
+</panel>
