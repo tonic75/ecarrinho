@@ -44,8 +44,7 @@ public class ProductsPanel extends JPanel {
 	 * Load all products persisted.
 	 */
 	public void loadProducts() {
-		List<Product> allProducts = productService.getAllProducts();
-		addProducts(allProducts);
+		addProducts(productService.getAllProducts());
 	}
 
 	/**

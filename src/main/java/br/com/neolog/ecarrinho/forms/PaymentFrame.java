@@ -14,9 +14,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ import org.swixml.SwingEngine;
 import br.com.neolog.ecarrinho.bean.PaymentMethod;
 import br.com.neolog.ecarrinho.bean.UserOrder;
 import br.com.neolog.ecarrinho.service.BasketService;
+import br.com.neolog.ecarrinho.service.CreditService;
 import br.com.neolog.ecarrinho.service.SessionService;
 import br.com.neolog.ecarrinho.service.UserOrderService;
 
@@ -37,13 +40,15 @@ public class PaymentFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	BasketService basketService;
+	private BasketService basketService;
 	@Autowired
-	SessionService session;
+	private SessionService sessionService;
 	@Autowired
-	UserOrderService userOrderService;
+	private UserOrderService userOrderService;
 	@Autowired
-	MainFrame mainFrame;
+	private MainFrame mainFrame;
+	@Autowired
+	private CreditService creditService;
 
 	private JPanel ousidePanel;
 	private JTextField totalField;
@@ -54,6 +59,8 @@ public class PaymentFrame extends JFrame {
 	private JTextField agencyField;
 	private JLabel accLabel;
 	private JTextField accField;
+	
+	private JFrame paymentWaitFrame = new JFrame("Esperando");
 
 	CellConstraints cc = new CellConstraints();
 
@@ -66,6 +73,13 @@ public class PaymentFrame extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		setResizable(false);
+		
+		paymentWaitFrame.add(new JLabel("Esperando pela confirmação do seu pagamento"));
+		paymentWaitFrame.setSize(250,100);
+		paymentWaitFrame.setResizable(false);
+		paymentWaitFrame.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		
 		ousidePanel.add(paymentMethods, cc.xy(3, 6));
 		addressArea.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 		setSize(288, 245);
@@ -127,37 +141,102 @@ public class PaymentFrame extends JFrame {
 
 	private void fillFields() {
 		totalField.setText("R$ " + basketService.getTotalValue());
-		addressArea.setText(session.getLoggedUser().getAddress());
-		cardField.setText(session.getLoggedUser().getCard());
-		agencyField.setText(session.getLoggedUser().getAgency());
-		accField.setText(session.getLoggedUser().getAcc());
+		addressArea.setText(sessionService.getLoggedUser().getAddress());
+		cardField.setText(sessionService.getLoggedUser().getCard());
+		agencyField.setText(sessionService.getLoggedUser().getAgency());
+		accField.setText(sessionService.getLoggedUser().getAcc());
 	}
 
-	public Action confirm = new AbstractAction() {
+	public Action confirm = new AbstractAction() 
+	{
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
-			try
-			{
-				userOrderService.save(new UserOrder(basketService.getBasket(),
-						Calendar.getInstance(), session.getLoggedUser(),
-						addressArea.getText(), cardField.getText(),
-						agencyField.getText(), accField.getText(),
-						(PaymentMethod)(paymentMethods.getSelectedItem())));
-			}
-			catch( HibernateException e1 )
-			{
-				e1.printStackTrace();
-			}
+			new Worker().execute();			
 		}
 	};
+	
+	private class Worker extends SwingWorker<Void, Void>
+	{
+		@Override
+		protected Void doInBackground() throws Exception {
+			showWait();
+			switch (paymentMethods.getSelectedIndex())
+			{
+				case 0:
+					if( creditService.isCreditOk( cardField.getText()) )
+					{
+						saveOrder();
+					}		
+					break;
+					
+				case 2:
+					if( creditService.isDebtOk( agencyField.getText(), accField.getText() ) )
+					{
+						saveOrder();
+					}	
+					break;
+				default:
+					saveOrder();
+			}	
+			return null;
+		}
+
+		@Override
+		protected void done() {
+			hideWait();
+		}
+		
+	}
+	
+	private void showWait()
+	{
+		setVisible(false);
+		paymentWaitFrame.setVisible(true);
+	}
+	
+	private void hideWait()
+	{
+		paymentWaitFrame.setVisible(false);
+		printSuccessMsg();
+		backToMain();
+	}
+	
+	public void saveOrder()
+	{
+		try
+		{
+			userOrderService.save(new UserOrder(basketService.getBasket(),
+					Calendar.getInstance(), sessionService.getLoggedUser(),
+					addressArea.getText(), cardField.getText(),
+					agencyField.getText(), accField.getText(),
+					(PaymentMethod)(paymentMethods.getSelectedItem())));	
+			basketService.newBasket();
+		}
+		catch( HibernateException e1 )
+		{
+			e1.printStackTrace();
+		}
+	}
+	
+	public void printSuccessMsg()
+	{
+		JOptionPane.showMessageDialog(getParent(),
+				"Compra efetuada com sucesso!", "",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
 
 	public Action cancel = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
-			setVisible(false);
-			mainFrame.setVisible(true);
+			backToMain();
 		}
 	};
+	
+	public void backToMain()
+	{
+		setVisible(false);
+		mainFrame.setVisible(true);
+	}
 
 	@Override
 	public void setVisible(boolean aFlag) {

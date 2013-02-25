@@ -8,6 +8,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import br.com.neolog.ecarrinho.forms.MainFrame;
 import br.com.neolog.ecarrinho.util.AddProducts;
 
+/**
+ * A class to get the main frame of the program and start it.
+ * 
+ * @author antonio.moreira
+ */
 public class Start {
 	
 	public static final ApplicationContext contextoPrincipal = new ClassPathXmlApplicationContext("META-INF/beans.xml");

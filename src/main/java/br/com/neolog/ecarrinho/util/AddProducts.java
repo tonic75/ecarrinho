@@ -7,6 +7,11 @@ import br.com.neolog.ecarrinho.bean.Product;
 import br.com.neolog.ecarrinho.dao.CategoryDao;
 import br.com.neolog.ecarrinho.dao.ProductDao;
 
+/**
+ * Add initial products and category to the system.
+ * 
+ * @author antonio.moreira
+ */
 @Component
 public class AddProducts {
 	

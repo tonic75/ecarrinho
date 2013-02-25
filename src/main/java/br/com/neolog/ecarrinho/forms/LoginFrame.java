@@ -19,7 +19,7 @@ import br.com.neolog.ecarrinho.service.SessionService;
 import br.com.neolog.ecarrinho.service.UserService;
 
 /**
- * The Class LoginFrame. This is a frame for a user to log in, incluing fields
+ * The Class LoginFrame. This is a frame for a user to log in, including fields
  * for name and password, a button to login e another on to register a new user.
  * 
  * @author antonio.moreira
@@ -67,11 +67,8 @@ public class LoginFrame extends JFrame {
 	 * Captures do action of log in and asks to the userService if the user and
 	 * pass passed are right.
 	 */
-	// TODO: complete it when it gets implemented
 	public Action logIn = new AbstractAction() {
-
 		private static final long serialVersionUID = -168221978922967631L;
-
 		public void actionPerformed(ActionEvent e) {
 			if((userService.isValidPassword(userText.getText(),
 					String.valueOf(passText.getPassword()))))
@@ -105,6 +102,10 @@ public class LoginFrame extends JFrame {
 		}
 	};
 	
+	
+	/* (non-Javadoc)
+	 * @see java.awt.Window#setVisible(boolean)
+	 */
 	@Override
 	public void setVisible( boolean aFlag )
 	{

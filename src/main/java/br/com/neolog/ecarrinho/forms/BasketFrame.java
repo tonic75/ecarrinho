@@ -10,6 +10,12 @@ import org.swixml.SwingEngine;
 
 import com.jgoodies.forms.debug.FormDebugPanel;
 
+/**
+ * This is the frame that shows to the user his products, prices and total of the order so far.
+ * It can be opened without problem at the same time of the main screen.
+ * 
+ * @author antonio.moreira
+ */
 @Component
 public class BasketFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -33,6 +39,10 @@ public class BasketFrame extends JFrame {
 		setResizable(false);
 	}
 	
+	/**
+	 * This method must be called before the screen is used.
+	 * Its not called in the constructor because it uses variables that are wired by spring.
+	 */
 	public void initialize()
 	{
 		productsContainer.getViewport().add(productsOnBasketHolder); 

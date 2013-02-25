@@ -14,6 +14,9 @@
 		<!-- configure properties of aspect here as normal -->
 	</bean>
 
+	<bean id="creditService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean"
+		p:serviceUrl="rmi://localhost/CreditService" p:serviceInterface="br.com.neolog.ecarrinho.service.CreditService" />
+
 	<!-- Configura spring para scanear os pacotes a procura de beans -->
 	<context:component-scan base-package="br.com.neolog.ecarrinho"></context:component-scan>
 

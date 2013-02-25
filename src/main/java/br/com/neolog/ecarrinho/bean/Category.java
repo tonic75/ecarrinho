@@ -23,7 +23,7 @@ public class Category implements Persistable {
 	private String name;
 
 	/**
-	 * Empty private default contructor for hibernate.
+	 * Empty private default constructor for hibernate.
 	 */
 	@SuppressWarnings("unused")
 	private Category(){}

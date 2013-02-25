@@ -16,6 +16,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -28,15 +29,18 @@ import br.com.neolog.ecarrinho.bean.Product;
 import br.com.neolog.ecarrinho.service.CategoryService;
 import br.com.neolog.ecarrinho.service.ProductService;
 import br.com.neolog.ecarrinho.service.SessionService;
-import br.com.neolog.ecarrinho.util.JFrameAspectAdapter;
 
-import com.google.common.collect.Multimap;
 import com.jgoodies.forms.debug.FormDebugPanel;
 
+/**
+ * This is the main screen of the program.
+ * 
+ * @author antonio.moreira
+ */
 @Component
-public class MainFrame extends JFrame implements ListSelectionListener{
+public class MainFrame extends JFrame implements ListSelectionListener {
 	private static final long serialVersionUID = 1L;
-	
+
 	private DefaultListModel categoriesListModel = new DefaultListModel();
 	private JList categoriesList = new JList(categoriesListModel);
 	private JScrollPane categoriesScroll;
@@ -49,12 +53,7 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 	private JButton registerBtn;
 	private JLabel userName;
 	private JButton exitBtn;
-	
-	@Autowired
-	JFrameAspectAdapter aspectAdapter;
-	
-	private Multimap<Category, Product> productsByCategoryMap;
-	
+
 	@Autowired
 	private BasketFrame basketPanel;
 	@Autowired
@@ -70,47 +69,55 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
-	private SessionService session;
+	private SessionService sessionService;
 
-	public MainFrame()
-	{
+	public MainFrame() {
 		try {
 			SwingEngine swingEngine = new SwingEngine(this);
-			swingEngine.getTaglib().registerTag("debugpanel", FormDebugPanel.class);
-			add(swingEngine.render("swixml/"+this.getClass().getSimpleName()+".xml"));
+			swingEngine.getTaglib().registerTag("debugpanel",
+					FormDebugPanel.class);
+			add(swingEngine.render("swixml/MainFrame.xml"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		setMinimumSize(new Dimension(765,550));
-		
-		productsContainer.setBorder(BorderFactory.createLineBorder(Color.black));
-		
+		setMinimumSize(new Dimension(765, 550));
 		categoriesList.addListSelectionListener(this);
 		categoriesScroll.getViewport().add(categoriesContainer.add(categoriesList));
+		//productsContainer.getViewport().add(productsPanel);
+	}
+	
+	/**
+	 * Puts borders on the components of the screen.
+	 */
+	public void setBorders()
+	{
+		productsContainer.setBorder(BorderFactory.createLineBorder(Color.black));
 		categoriesScroll.setBorder(BorderFactory.createLineBorder(Color.black));
-		
 		filterPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-		
 		basketLoginPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
-	
-	public void inicialLoad()
-	{
-		productsByCategoryMap = productService.getAllProductsByCategory();
-		loadProducts();
+
+	/**
+	 * This method must be called before the screen is used.
+	 * Its not called in the constructor because it uses variables that are wired by spring.
+	 */
+	public void inicialLoad() {
 		loadCategories();
+		loadProducts();
 		updateUiSessionStatus();
+		//filterByCategory();
 		basketPanel.initialize();
 	}
-	
-	private void loadProducts()
-	{
+
+	/**
+	 * 
+	 */
+	private void loadProducts() {
 		productsPanel.loadProducts();
 		productsContainer.getViewport().add(productsPanel);
 	}
-	
-	private void loadCategories()
-	{
+
+	private void loadCategories() {
 		List<Category> categories = categoryService.getAllCategories();
 		categoriesListModel.add(0, "Todas os produtos");
 		for (Category category : categories) {
@@ -118,20 +125,16 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 		}
 	}
 
-	public void updateUiSessionStatus()
-	{
-		if(session.getLoggedUser() == null)
-		{
+	public void updateUiSessionStatus() {
+		if (sessionService.getLoggedUser() == null) {
 			userName.setVisible(false);
 			exitBtn.setVisible(false);
 			logInBtn.setVisible(true);
 			registerBtn.setVisible(true);
-		}
-		else
-		{
+		} else {
 			logInBtn.setVisible(false);
 			registerBtn.setVisible(false);
-			userName.setText(session.getLoggedUser().getName());
+			userName.setText(sessionService.getLoggedUser().getName());
 			userName.setVisible(true);
 			exitBtn.setVisible(true);
 		}
@@ -140,34 +143,30 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 	public void valueChanged(ListSelectionEvent e) {
 		filterByCategory();
 	}
-	
-	private void filterByCategory()
-	{
-		if( categoriesList.getSelectedIndex() == 0 )
-		{
+
+	private void filterByCategory() {
+		if (categoriesList.getSelectedIndex() == 0) {
 			productsPanel.loadProducts();
-		}
-		else
-		{
-			loadProductsByCategory( (String) categoriesList.getSelectedValue());
+		} else {
+			loadProductsByCategory((String) categoriesList.getSelectedValue());
 		}
 		refreshUI();
 	}
-	
-	private void loadProductsByCategory(String categoryName)
-	{
-		List<Product> products = (List<Product>) productsByCategoryMap.get(categoryService.getCategory(categoryName));
+
+	private void loadProductsByCategory(String categoryName) {
+		List<Product> products = productService.getProductsByCategory(categoryName) ;
 		productsPanel.loadProducts(products);
 	}
-	
+
 	public Action filter = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
-			productsPanel.loadProducts(productService.getProductsByDescription( filterField.getText() ));
+			productsPanel.loadProducts(productService
+					.getProductsByDescription(filterField.getText()));
 			refreshUI();
 		}
 	};
-	
+
 	public Action clean = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
@@ -176,14 +175,14 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 			filterByCategory();
 		}
 	};
-	
+
 	public Action showBasket = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
 			basketPanel.setVisible(true);
 		}
 	};
-	
+
 	public Action logIn = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
@@ -191,7 +190,7 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 			loginFrame.setVisible(true);
 		}
 	};
-	
+
 	public Action register = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
@@ -199,38 +198,42 @@ public class MainFrame extends JFrame implements ListSelectionListener{
 			registerFrame.setVisible(true);
 		}
 	};
-	
+
 	public Action exit = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
-			session.LogOut();
+			sessionService.LogOut();
 			updateUiSessionStatus();
 		}
 	};
-	
+
 	public Action finalizeBuy = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
 			finalizeBuy();
 		}
 	};
-	
-	public void finalizeBuy()
-	{
-		aspectAdapter.windowCaller(paymentFrame);
+
+	public void finalizeBuy() {
 		setVisible(false);
-		paymentFrame.setVisible(true);
+		SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>()
+		{
+			@Override
+			protected Void doInBackground() throws Exception {
+				paymentFrame.setVisible(true);
+				return null;
+			}
+		};
+		worker.execute();
 	}
-	
+
 	@Override
-	public void setVisible( boolean aFlag )
-	{
+	public void setVisible(boolean aFlag) {
 		updateUiSessionStatus();
 		super.setVisible(aFlag);
 	}
-	
-	private void refreshUI()
-	{
+
+	private void refreshUI() {
 		validate();
 		repaint();
 	}
