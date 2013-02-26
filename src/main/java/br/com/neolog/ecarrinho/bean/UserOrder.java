@@ -143,7 +143,7 @@ public class UserOrder implements Persistable{
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this).add("User: ", user)
-				.add("orderTime: ", orderTime).toString();
+				.add("Basket: ", basket.getBasket()).toString();
 	}
 
 }

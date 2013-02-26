@@ -12,8 +12,10 @@ import org.swixml.SwingEngine;
 
 
 import br.com.neolog.ecarrinho.bean.Product;
+import br.com.neolog.ecarrinho.util.NumberField;
 
 import com.jgoodies.forms.debug.FormDebugPanel;
+import com.jgoodies.forms.layout.CellConstraints;
 
 public class ProductOnBasketPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -22,9 +24,13 @@ public class ProductOnBasketPanel extends JPanel {
 	private Product product;
 	private Long amount;
 	
+	private CellConstraints cc = new CellConstraints();
+	
 	private JLabel productName;
-	private JTextField prodQtdTxt;
+	private NumberField amountField = new NumberField();
 	private JTextField unitPrice;
+	
+	private JPanel mainPanel;
 
 	public ProductOnBasketPanel( Product product, Long amount, ProductsOnBasketHolder productsOnBasketHolder ) {
 		this.productsOnBasketHolder = productsOnBasketHolder;
@@ -40,24 +46,23 @@ public class ProductOnBasketPanel extends JPanel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		mainPanel.add(amountField, cc.xy(4, 1));
 		setInfo();
 	}	
 	
 	private void setInfo()
 	{
 		productName.setText(product.getDescription());
-		prodQtdTxt.setText(String.valueOf(amount));
+		amountField.setText(String.valueOf(amount));
 		unitPrice.setText(String.valueOf(product.getPrice()));
 	}
 	
 	public Action changeAmount = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
-
 		public void actionPerformed(ActionEvent e) {
-			// TODO: when it gets implemented, verify if we have enough stock
-			if( Long.valueOf(prodQtdTxt.getText()) > 0 )
+			if( Long.valueOf(amountField.getText()) > 0 )
 			{
-				amount = Long.valueOf(prodQtdTxt.getText());
+				amount = Long.valueOf(amountField.getText());
 				productsOnBasketHolder.changeAmount(product,amount);
 				productsOnBasketHolder.refreshBasket();
 			}
@@ -66,9 +71,7 @@ public class ProductOnBasketPanel extends JPanel {
 	
 	public Action remove = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
-
 		public void actionPerformed(ActionEvent e) {
-			// TODO: put the product back in stock
 			productsOnBasketHolder.remove(product);
 			productsOnBasketHolder.refreshBasket();
 		}

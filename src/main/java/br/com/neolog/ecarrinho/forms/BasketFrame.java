@@ -35,7 +35,7 @@ public class BasketFrame extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		setSize(614,400);
+		setSize(614,410);
 		setResizable(false);
 	}
 	

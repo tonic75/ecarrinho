@@ -3,6 +3,7 @@ package br.com.neolog.ecarrinho.forms;
 import java.awt.FlowLayout;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.neolog.ecarrinho.bean.Product;
+import br.com.neolog.ecarrinho.service.AcquisitionService;
 import br.com.neolog.ecarrinho.service.BasketService;
 import br.com.neolog.ecarrinho.util.WrapLayout;
 
@@ -19,6 +21,9 @@ public class ProductsOnBasketHolder extends JPanel {
 	
 	@Autowired
 	private BasketService basketService;
+	
+	@Autowired
+	private AcquisitionService acquisitionService;
 	
 	private JTextField totalValue;
 	
@@ -52,7 +57,17 @@ public class ProductsOnBasketHolder extends JPanel {
 	
 	public void changeAmount(Product product,Long newAmount)
 	{
-		basketService.changeAmount(product, newAmount);
+		try
+		{
+			basketService.changeAmount(product, newAmount);
+		}
+		catch( IllegalArgumentException e)
+		{
+			JOptionPane.showMessageDialog(getParent(),
+					"Quantidade pedida não disponível em estoque.\n" +
+					"Quantidade disponível: " + acquisitionService.stockAmount(product), "!",
+					JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 	
 	public void remove(Product product)

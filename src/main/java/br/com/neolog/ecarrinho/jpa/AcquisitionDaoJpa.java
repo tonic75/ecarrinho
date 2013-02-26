@@ -1,5 +1,7 @@
 package br.com.neolog.ecarrinho.jpa;
 
+import org.springframework.stereotype.Component;
+
 import br.com.neolog.ecarrinho.bean.Acquisition;
 import br.com.neolog.ecarrinho.dao.AcquisitionDao;
 
@@ -11,6 +13,7 @@ import br.com.neolog.ecarrinho.dao.AcquisitionDao;
  * 
  * @author antonio.moreira
  * */
+@Component
 public class AcquisitionDaoJpa extends GenericDaoJpa<Acquisition, Long> implements AcquisitionDao {
 	public AcquisitionDaoJpa() {
 		super(Acquisition.class);

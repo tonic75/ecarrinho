@@ -22,12 +22,9 @@
 		</label>
 		</panel>
 
-		<panel background="255,255,255">
+		<panel id="addPanel" background="255,255,255">
 			<formlayout colspecs="8px, 20px, 10px, 92px, 8px" rowspecs="38px" />
 			<cellconstraints gridX="1" gridY="3" />
-			<textfield id="qtd" text="1">
-				<cellconstraints gridX="2" gridY="1" />
-			</textfield>
 			<button name="addToBasketButton" id="addToBasketButton" text="Adicionar"
 				action="addToBasket">
 				<cellconstraints gridX="4" gridY="1" />

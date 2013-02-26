@@ -16,7 +16,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.SwingWorker;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -29,6 +28,7 @@ import br.com.neolog.ecarrinho.bean.Product;
 import br.com.neolog.ecarrinho.service.CategoryService;
 import br.com.neolog.ecarrinho.service.ProductService;
 import br.com.neolog.ecarrinho.service.SessionService;
+import br.com.neolog.ecarrinho.util.Adapter;
 
 import com.jgoodies.forms.debug.FormDebugPanel;
 
@@ -70,6 +70,8 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 	private CategoryService categoryService;
 	@Autowired
 	private SessionService sessionService;
+	@Autowired
+	private Adapter adapter;
 
 	public MainFrame() {
 		try {
@@ -179,7 +181,7 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 	public Action showBasket = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
-			basketPanel.setVisible(true);
+			adapter.callBasket(basketPanel);
 		}
 	};
 
@@ -214,17 +216,8 @@ public class MainFrame extends JFrame implements ListSelectionListener {
 		}
 	};
 
-	public void finalizeBuy() {
-		setVisible(false);
-		SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>()
-		{
-			@Override
-			protected Void doInBackground() throws Exception {
-				paymentFrame.setVisible(true);
-				return null;
-			}
-		};
-		worker.execute();
+	public void finalizeBuy() {		
+		adapter.callPayment(paymentFrame);
 	}
 
 	@Override

@@ -29,6 +29,25 @@ public class Acquisition implements Persistable{
 	@Basic
 	private Long amount;
 	
+	@SuppressWarnings("unused")
+	private Acquisition(){}
+	
+	public Acquisition( Product product, Long amount )
+	{
+		this.product = product;
+		this.amount = amount;
+	}
+	
+	public Product getProduct()
+	{
+		return product;
+	}
+	
+	public Long getAmount()
+	{
+		return amount;
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

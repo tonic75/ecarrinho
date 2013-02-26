@@ -2,10 +2,12 @@ package br.com.neolog.ecarrinho.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.neolog.ecarrinho.bean.Acquisition;
 import br.com.neolog.ecarrinho.bean.Category;
 import br.com.neolog.ecarrinho.bean.Product;
 import br.com.neolog.ecarrinho.dao.CategoryDao;
 import br.com.neolog.ecarrinho.dao.ProductDao;
+import br.com.neolog.ecarrinho.service.AcquisitionService;
 
 /**
  * Add initial products and category to the system.
@@ -13,19 +15,23 @@ import br.com.neolog.ecarrinho.dao.ProductDao;
  * @author antonio.moreira
  */
 @Component
-public class AddProducts {
+public class AddInitialData {
 	
 	@Autowired
 	ProductDao productDao;
 	
 	@Autowired
-	CategoryDao categoryDao;		
+	CategoryDao categoryDao;
+	
+	@Autowired
+	AcquisitionService acquisitionService;
 	
 	public void productPersistence()
 	{
 		Category Automotivo = new Category("Automotivo");
 		categoryDao.save(Automotivo);
-		productDao.save(new Product(Automotivo, "GPS 5 Polegadas", 259.00, "gps5pol.jpg"));
+		Product GPS_5_POL = new Product(Automotivo, "GPS 5 Polegadas", 259.00, "gps5pol.jpg");
+		productDao.save(GPS_5_POL);
 		productDao.save(new Product(Automotivo, "CD Player Sony", 329.00, "cdsony.jpg"));
 		productDao.save(new Product(Automotivo, "DVD Ícone", 499.00, "dvdicone.jpg"));
 		
@@ -59,6 +65,9 @@ public class AddProducts {
 		productDao.save(new Product(Flores, "Coração Chic de Rosas Vermelhas", 49.60, "coracaochic.jpg"));
 		productDao.save(new Product(Flores, "Primavera das Rosas", 144.60, "primavera.jpg"));
 		productDao.save(new Product(Flores, "Sempre Juntos", 45.80, "semprejuntos.jpg"));
-		productDao.save(new Product(Flores, "Hora de Comemorar", 116.80, "comemorar.jpg"));		
+		productDao.save(new Product(Flores, "Hora de Comemorar", 116.80, "comemorar.jpg"));	
+		
+		acquisitionService.addAcquisition(new Acquisition(GPS_5_POL, 10L));
+		acquisitionService.addAcquisition(new Acquisition(GPS_5_POL, 5L));
 	}
 }

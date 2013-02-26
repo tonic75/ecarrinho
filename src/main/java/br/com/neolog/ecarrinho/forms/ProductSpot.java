@@ -8,14 +8,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import org.swixml.SwingEngine;
 
-
 import br.com.neolog.ecarrinho.bean.Product;
+import br.com.neolog.ecarrinho.util.NumberField;
 
 import com.jgoodies.forms.debug.FormDebugPanel;
+import com.jgoodies.forms.layout.CellConstraints;
 
 /**
  * The Class ProductSpot.
@@ -27,16 +27,13 @@ public class ProductSpot extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private Product product;
-
-	private JTextField qtd;
-
+	private NumberField amount = new NumberField();
 	private JLabel price;
-
 	private JTextArea description;
-
 	private JLabel iconLabel;
-	
 	private ProductsPanel productsPanel;
+	private JPanel addPanel;
+	private CellConstraints cc = new CellConstraints();
 
 	/**
 	 * Instantiates a new product spot.
@@ -57,18 +54,19 @@ public class ProductSpot extends JPanel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		amount.setText("1");
 		loadProductData();
+		
+		addPanel.add(amount, cc.xy(2, 1));
 	}
 
 	/** The action of the button that add a product to the basket. */
-	// TODO: complete it when it gets implemented
 	public Action addToBasket = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
-			if( Long.valueOf(qtd.getText()) > 0 ) 
+			if( Long.valueOf(amount.getText()) > 0 ) 
 			{
-				productsPanel.addToBasket(product, Long.valueOf(qtd.getText()));
-				// TODO: verify if that are enough stock to execute the action
+				productsPanel.addToBasket(product, Long.valueOf(amount.getText()));
 			}
 		}
 	};
