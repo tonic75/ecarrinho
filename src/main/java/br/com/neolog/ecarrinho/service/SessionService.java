@@ -11,29 +11,36 @@ import br.com.neolog.ecarrinho.bean.User;
  * @author antonio.moreira
  */
 @Component
-public class SessionService {
+public class SessionService
+{
 
-	/** Creates a new Session in here in order to not allow anyone else to autowire one.. */
+	/**
+	 * Creates a new Session in here in order to not allow anyone else to
+	 * autowire one..
+	 */
 	private Session session = new Session();
 
 	/**
 	 * Gets the logged user.
-	 *
+	 * 
 	 * @return the logged user
 	 */
-	public User getLoggedUser() {
+	public User getLoggedUser()
+	{
 		return session.getLoggedUser();
 	}
 
 	/**
 	 * Log in.
-	 *
-	 * @param loggedUser the logged user
+	 * 
+	 * @param loggedUser
+	 *            the logged user
 	 */
-	public void logIn(User loggedUser) {
-		session.logIn(loggedUser);
-	}	
-	
+	public void logIn( User loggedUser )
+	{
+		session.logIn( loggedUser );
+	}
+
 	/**
 	 * Log out.
 	 */
@@ -41,10 +48,10 @@ public class SessionService {
 	{
 		session.logOut();
 	}
-	
+
 	/**
 	 * Checks if anyone is logged.
-	 *
+	 * 
 	 * @return true, if anyone is logged
 	 */
 	public boolean isAnyoneLogged()

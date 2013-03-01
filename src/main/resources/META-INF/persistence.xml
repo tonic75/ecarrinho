@@ -5,13 +5,13 @@
 
 	<persistence-unit name="ecarrinho" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		
-		
+
+
 		<properties>
-    		<property name="hibernate.archive.autodetection" value="true" />
-			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.archive.autodetection" value="true" />
+			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="true" />
-			
+
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3307/carrinho" />
 			<property name="hibernate.connection.username" value="root" />
@@ -21,9 +21,9 @@
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
 			<property name="connection.pool_size" value="1" />
 			<property name="hibernate.hbm2ddl.auto" value="create" />
-			<property name="hibernate.archive.autodetection" value="class, hbm"/>
-			
-			
+			<property name="hibernate.archive.autodetection" value="class, hbm" />
+
+
 		</properties>
 	</persistence-unit>
 </persistence>

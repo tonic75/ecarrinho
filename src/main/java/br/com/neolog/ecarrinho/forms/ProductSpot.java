@@ -6,6 +6,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -64,9 +65,15 @@ public class ProductSpot extends JPanel {
 	public Action addToBasket = new AbstractAction() {
 		private static final long serialVersionUID = 1L;
 		public void actionPerformed(ActionEvent e) {
-			if( Long.valueOf(amount.getText()) > 0 ) 
+			if( !amount.getText().equals("") && Long.valueOf(amount.getText()) > 0 ) 
 			{
 				productsPanel.addToBasket(product, Long.valueOf(amount.getText()));
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null,
+						"Quantidade inválida!", "",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	};

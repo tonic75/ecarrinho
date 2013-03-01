@@ -25,66 +25,63 @@ import br.com.neolog.ecarrinho.service.UserService;
  * @author antonio.moreira
  */
 @Component
-public class LoginFrame extends JFrame {
-
+public class LoginFrame extends JFrame
+{
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private UserService userService;
-	
 	@Autowired
 	private RegisterFrame registerFrame;
-	
 	@Autowired
 	private SessionService session;
-	
 	@Autowired
 	private MainFrame mainFrame;
-
 	private JTextField userText;
-
 	private JPasswordField passText;
 
-	public LoginFrame() {
-		setSize(270, 150);
-		try {
-			SwingEngine engine = new SwingEngine(this);
-			add(engine.render("swixml/" + this.getClass().getSimpleName()
-					+ ".xml"));
-		} catch (Exception e) {
+	public LoginFrame()
+	{
+		setSize( 270, 150 );
+		try
+		{
+			SwingEngine engine = new SwingEngine( this );
+			add( engine.render( "swixml/" + this.getClass().getSimpleName() + ".xml" ) );
+		}
+		catch( Exception e )
+		{
 			e.printStackTrace();
 		}
-		addWindowListener(new WindowAdapter() {
+		addWindowListener( new WindowAdapter()
+		{
 			@Override
-			public void windowClosing(WindowEvent e)
+			public void windowClosing( WindowEvent e )
 			{
-				mainFrame.setVisible(true);
+				mainFrame.setVisible( true );
 			}
-		});
+		} );
 	}
 
 	/**
 	 * Captures do action of log in and asks to the userService if the user and
 	 * pass passed are right.
 	 */
-	public Action logIn = new AbstractAction() {
+	public Action logIn = new AbstractAction()
+	{
 		private static final long serialVersionUID = -168221978922967631L;
-		public void actionPerformed(ActionEvent e) {
-			if((userService.isValidPassword(userText.getText(),
-					String.valueOf(passText.getPassword()))))
+
+		public void actionPerformed( ActionEvent e )
+		{
+			if( ( userService.isValidPassword( userText.getText(), String.valueOf( passText.getPassword() ) ) ) )
 			{
-				session.logIn(userService.getUser(userText.getText()));
-				JOptionPane.showMessageDialog(getParent(),
-						"Bem vindo, " + userText.getText(), ":)",
-						JOptionPane.INFORMATION_MESSAGE);
-				setVisible(false);
-				mainFrame.setVisible(true);
+				session.logIn( userService.getUser( userText.getText() ) );
+				JOptionPane.showMessageDialog( getParent(), "Bem vindo, " + userText.getText(), ":)", JOptionPane.INFORMATION_MESSAGE );
+				setVisible( false );
+				mainFrame.setVisible( true );
 			}
 			else
 			{
-				JOptionPane.showMessageDialog(getParent(),
-						"Dados incorretos", "Erro",
-						JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog( getParent(), "Dados incorretos", "Erro", JOptionPane.ERROR_MESSAGE );
 			}
 		}
 	};
@@ -93,25 +90,35 @@ public class LoginFrame extends JFrame {
 	 * Captures the action of registering a new user and calls the frame that
 	 * does it.
 	 */
-	public Action newUser = new AbstractAction() {
+	public Action newUser = new AbstractAction()
+	{
 		private static final long serialVersionUID = -9198682512676260864L;
 
-		public void actionPerformed(ActionEvent e) {
-			setVisible(false);
-			registerFrame.setVisible(true);
+		public void actionPerformed( ActionEvent e )
+		{
+			setVisible( false );
+			registerFrame.setVisible( true );
 		}
 	};
-	
-	
-	/* (non-Javadoc)
+
+	private void cleanFields()
+	{
+		userText.setText( "" );
+		passText.setText( "" );
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.awt.Window#setVisible(boolean)
 	 */
 	@Override
 	public void setVisible( boolean aFlag )
 	{
-		super.setVisible(aFlag);
+		if( aFlag )
+		{
+			cleanFields();
+		}
+		super.setVisible( aFlag );
 	}
-	
-	
-
 }

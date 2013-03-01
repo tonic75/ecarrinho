@@ -17,29 +17,32 @@ import br.com.neolog.ecarrinho.util.MustBeLogged;
  * @author antonio.moreira
  */
 @Component
-public class UserOrderService {
+public class UserOrderService
+{
 
 	@Autowired
 	private UserOrderDao userOrderDao;
 
 	/**
 	 * Save a UserOrder.
-	 *
-	 * @param userOrder the user order
+	 * 
+	 * @param userOrder
+	 *            the user order
 	 */
 	@MustBeLogged
 	public void save( UserOrder userOrder )
 	{
-		userOrderDao.save(userOrder);
+		userOrderDao.save( userOrder );
 	}
 
 	@Transactional
-	public long getTotalAmountProductSold(Product product) {
-		List<UserOrder> userOrders =  userOrderDao.getAll();
+	public long getTotalAmountProductSold( Product product )
+	{
+		List<UserOrder> userOrders = userOrderDao.getAll();
 		long total = 0;
-		for (UserOrder userOrder : userOrders) {
-			if( userOrder.getBasket().getBasket().containsKey(product) )
-				total += userOrder.getBasket().getBasket().get(product);
+		for( UserOrder userOrder : userOrders )
+		{
+			if( userOrder.getBasket().getBasket().containsKey( product ) ) total += userOrder.getBasket().getBasket().get( product );
 		}
 		return total;
 	}

@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <panel id="mainPanel" background="255,255,255">
-	<formlayout colspecs="15px, f:220px:g, c:50px, f:25px, c:80px, c:70px, f:40px, c:80px" rowspecs="c:30px:g" />
+	<formlayout
+		colspecs="15px, f:220px:g, c:50px, f:25px, c:80px, c:70px, f:40px, c:80px"
+		rowspecs="c:30px:g" />
 	<label id="productName" text="Produto papiu papirus pompilho pomposo">
 		<cellconstraints gridX="2" gridY="1" />
 	</label>
 	<label text="Quant.:">
 		<cellconstraints gridX="3" gridY="1" />
 	</label>
-	<button text="Alterar" action="changeAmount" >
+	<button text="Alterar" action="changeAmount">
 		<cellconstraints gridX="5" gridY="1" />
 	</button>
 	<label text="Preço unit.:">
 		<cellconstraints gridX="6" gridY="1" />
 	</label>
-	<textfield id="unitPrice" text="3" >
+	<textfield id="unitPrice" text="3">
 		<cellconstraints gridX="7" gridY="1" />
 	</textfield>
 	<button text="Remover" action="remove">

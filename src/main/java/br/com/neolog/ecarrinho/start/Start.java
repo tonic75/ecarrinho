@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import br.com.neolog.ecarrinho.forms.MainFrame;
-import br.com.neolog.ecarrinho.util.AddInitialData;
 
 /**
  * A class to get the main frame of the program and start it.

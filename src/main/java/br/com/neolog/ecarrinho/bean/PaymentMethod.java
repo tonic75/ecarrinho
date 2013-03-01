@@ -1,36 +1,39 @@
 package br.com.neolog.ecarrinho.bean;
 
 /**
- * The Enum PaymentMethod.
- * Enum to represent the possible methods of payment.
- *
+ * The Enum PaymentMethod. Enum to represent the possible methods of payment.
+ * 
  * @author antonio.moreira
  */
-public enum PaymentMethod {	
-	
+public enum PaymentMethod
+{
+
 	/** Credit card. */
-	CREDIT("Crédito"), 
-	
+	CREDIT( "Crédito" ),
+
 	/** Bank slip. */
-	BANK_SLIP("Boleto"), 
-	
+	BANK_SLIP( "Boleto" ),
+
 	/** Debit directly in the account. */
-	DEBIT("Débito");
-	
+	DEBIT( "Débito" );
+
 	/** A String to represent a name to be showed to the user. */
 	String beautifulName;
-	
+
 	/**
 	 * Instantiates a new payment method with its name.
-	 *
-	 * @param beautifulName the beautiful name
+	 * 
+	 * @param beautifulName
+	 *            the beautiful name
 	 */
 	private PaymentMethod( String beautifulName )
 	{
 		this.beautifulName = beautifulName;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Enum#toString()
 	 */
 	@Override

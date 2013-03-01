@@ -16,7 +16,8 @@
 		<aspectj-version>1.6.11</aspectj-version>
 		<guava-version>13.0</guava-version>
 		<junit-version>4.11</junit-version>
-
+		<spring-ws-version>2.1.2.RELEASE</spring-ws-version>
+		<cxf.version>2.4.1</cxf.version>
 	</properties>
 
 	<repositories>
@@ -25,6 +26,12 @@
 			<name>SpringSource Repository</name>
 			<url>http://repo.springsource.org/release</url>
 		</repository>
+		<repository>
+			<id>maven2-repository.java.net</id>
+			<name>Java.net Repository for Maven</name>
+			<url>http://download.java.net/maven/2/</url>
+			<layout>default</layout>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -32,6 +39,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.ws</groupId>
+			<artifactId>spring-ws-core</artifactId>
+			<version>${spring-ws-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -143,6 +155,71 @@
 			<artifactId>jgoodies-forms</artifactId>
 			<version>1.6.0</version>
 		</dependency>
+
+		<!-- JAX-WS -->
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>2.2.7</version>
+		</dependency>
+
+		<!-- CXF Dependencies -->
+		<dependency>
+			<groupId>jta</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.0.1b</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-core</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-simple</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-databinding-aegis</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-local</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-jms</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-management</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-common-utilities</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<!-- End of CXF Dependencies -->
 
 	</dependencies>
 </project>

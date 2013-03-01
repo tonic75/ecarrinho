@@ -15,7 +15,8 @@ import br.com.neolog.ecarrinho.dao.AcquisitionDao;
  * @author antonio.moreira
  */
 @Component
-public class AcquisitionService {
+public class AcquisitionService
+{
 
 	@Autowired
 	private AcquisitionDao acquisitionDao;
@@ -23,8 +24,9 @@ public class AcquisitionService {
 	@Autowired
 	private UserOrderService userOrderService;
 
-	public void addAcquisition(Acquisition acquisition) {
-		acquisitionDao.save(acquisition);
+	public void addAcquisition( Acquisition acquisition )
+	{
+		acquisitionDao.save( acquisition );
 	}
 
 	/**
@@ -32,20 +34,22 @@ public class AcquisitionService {
 	 * done by the sum of the acquisitions of that product minus the sum of the
 	 * orders of this product.
 	 * 
-	 * @param product that is wanted to know the amount is stock
+	 * @param product
+	 *            that is wanted to know the amount is stock
 	 * @return the amount available to be sold of that product
 	 */
-	public long stockAmount(Product product) {
-		return totalAcquistionsByProduct(product)
-				- userOrderService.getTotalAmountProductSold(product);
+	public long stockAmount( Product product )
+	{
+		return totalAcquistionsByProduct( product ) - userOrderService.getTotalAmountProductSold( product );
 	}
 
-	private long totalAcquistionsByProduct(Product product) {
+	private long totalAcquistionsByProduct( Product product )
+	{
 		List<Acquisition> acquisitions = acquisitionDao.getAll();
 		long total = 0;
-		for (Acquisition acquisition : acquisitions) {
-			if (acquisition.getProduct().equals(product))
-				total += acquisition.getAmount();
+		for( Acquisition acquisition : acquisitions )
+		{
+			if( acquisition.getProduct().equals( product ) ) total += acquisition.getAmount();
 		}
 		return total;
 	}

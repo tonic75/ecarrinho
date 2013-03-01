@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <panel id="outsidepanel" background="255,255,255">
-	<formlayout colspecs="10px, 128px, 10px, l:140px"
-		rowspecs="8px, f:128px:n, 8px" />
+	<formlayout colspecs="10px, 128px, 10px, l:140px" rowspecs="8px, f:128px:n, 8px" />
 
 	<label id="iconLabel">
 		<cellconstraints gridX="2" gridY="2" />
@@ -10,20 +9,22 @@
 	<panel>
 		<formlayout colspecs="140px" rowspecs="70px, 20px, 38px" />
 		<cellconstraints gridX="4" gridY="2" />
-		<textarea id="description" HorizontalAlignment="CENTER" rows="4" editable="false" enabled="false" lineWrap="true">
+		<textarea id="description" HorizontalAlignment="CENTER" rows="4"
+			editable="false" enabled="false" lineWrap="true">
 			<cellconstraints gridX="1" gridY="1" />
 		</textarea>
 
 		<panel background="255,255,255">
-		<formlayout colspecs="f:140px:g" rowspecs="f:20px:g" />
+			<formlayout colspecs="f:140px:g" rowspecs="f:20px:g" />
 			<cellconstraints gridX="1" gridY="2" />
-				<label id="price" HorizontalAlignment="CENTER" background="255,255,255">
-			<cellconstraints gridX="1" gridY="1" />
-		</label>
+			<label id="price" HorizontalAlignment="CENTER" background="255,255,255">
+				<cellconstraints gridX="1" gridY="1" />
+			</label>
 		</panel>
 
 		<panel id="addPanel" background="255,255,255">
-			<formlayout colspecs="8px, 20px, 10px, 92px, 8px" rowspecs="38px" />
+			<formlayout colspecs="8px, 20px, 10px, 92px, 8px"
+				rowspecs="38px" />
 			<cellconstraints gridX="1" gridY="3" />
 			<button name="addToBasketButton" id="addToBasketButton" text="Adicionar"
 				action="addToBasket">

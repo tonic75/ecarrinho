@@ -14,7 +14,8 @@ import br.com.neolog.ecarrinho.bean.Product;
  * @author antonio.moreira
  */
 @Component
-public class BasketService {
+public class BasketService
+{
 
 	/**
 	 * Creates a new basket in here in order to not allow anyone else to
@@ -25,14 +26,16 @@ public class BasketService {
 	@Autowired
 	private AcquisitionService acquisitionService;
 
-	public Basket getBasket() {
+	public Basket getBasket()
+	{
 		return basket;
 	}
 
-	public Map<Product, Long> getProducts() {
+	public Map<Product, Long> getProducts()
+	{
 		return basket.getBasket();
 	}
-	
+
 	/**
 	 * Adds the to basket.
 	 * 
@@ -45,14 +48,19 @@ public class BasketService {
 	 *             if the amount of the product to be added to the basket is not
 	 *             available in stock
 	 */
-	public void addToBasket(Product product, Long amount) {
+	public void addToBasket( Product product, Long amount )
+	{
 		long amountOnBasketNow = 0;
-		if( basket.getBasket().containsKey(product))
+		if( amount < 1 )
 		{
-			amountOnBasketNow = basket.getBasket().get(product);
+			throw new IllegalArgumentException( "amount = zero" );
 		}
-		checkStockAmount(product, amountOnBasketNow + amount);
-		basket.addToBasket(product, amount);
+		if( basket.getBasket().containsKey( product ) )
+		{
+			amountOnBasketNow = basket.getBasket().get( product );
+		}
+		checkStockAmount( product, amountOnBasketNow + amount );
+		basket.addToBasket( product, amount );
 	}
 
 	/**
@@ -67,25 +75,23 @@ public class BasketService {
 	 *             if the amount of the product to be added to the basket is not
 	 *             available in stock
 	 */
-	public void changeAmount(Product product, Long newAmount) {
-		checkStockAmount(product, newAmount);
-		basket.changeAmount(product, newAmount);
-	}
-	
-	public void checkStockAmount(Product product, Long amount)
+	public void changeAmount( Product product, Long newAmount )
 	{
-		if( acquisitionService.stockAmount(product) < amount )
+		if( newAmount < 1 )
 		{
-			throw new IllegalArgumentException(
-					"Not enough product amount in stock");
+			throw new IllegalArgumentException( "amount = zero" );
 		}
+		checkStockAmount( product, newAmount );
+		basket.changeAmount( product, newAmount );
 	}
 
-	public void remove(Product product) {
-		basket.remove(product);
+	public void remove( Product product )
+	{
+		basket.remove( product );
 	}
 
-	public void newBasket() {
+	public void newBasket()
+	{
 		basket = new Basket();
 	}
 
@@ -95,11 +101,21 @@ public class BasketService {
 	 * 
 	 * @return the total value
 	 */
-	public double getTotalValue() {
+	public double getTotalValue()
+	{
 		return basket.getTotalValue();
 	}
 
-	public boolean isEmpty() {
+	public boolean isEmpty()
+	{
 		return basket.getBasket().isEmpty();
+	}
+
+	private void checkStockAmount( Product product, Long amount )
+	{
+		if( acquisitionService.stockAmount( product ) < amount )
+		{
+			throw new IllegalArgumentException( "Not enough product amount in stock" );
+		}
 	}
 }

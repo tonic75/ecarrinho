@@ -16,8 +16,9 @@ import com.google.common.base.Objects;
  *         The Class User represents a user with his user name and password.
  */
 @Entity
-@Access(AccessType.FIELD)
-public class User implements Persistable {
+@Access( AccessType.FIELD )
+public class User implements Persistable
+{
 
 	@Id
 	private String user;
@@ -33,21 +34,22 @@ public class User implements Persistable {
 
 	@Basic
 	private String cardNumber;
-	
+
 	@Basic
 	private String agency;
-	
+
 	@Basic
 	private String accNumber;
 
 	@Basic
 	private String CPF;
-	
+
 	/**
 	 * Empty private default constructor for hibernate.
 	 */
-	@SuppressWarnings("unused")
-	private User() {
+	@SuppressWarnings( "unused" )
+	private User()
+	{
 	}
 
 	/**
@@ -58,14 +60,15 @@ public class User implements Persistable {
 	 * @param pass
 	 *            the pass
 	 */
-	public User(String user, String pass) {
+	public User( String user, String pass )
+	{
 		super();
 		this.user = user;
 		this.pass = pass;
 	}
 
-	public User(String user, String pass, String name, String address,
-			String cardNumber, String agency, String accNumber, String CPF) {
+	public User( String user, String pass, String name, String address, String cardNumber, String agency, String accNumber, String CPF )
+	{
 		this.user = user;
 		this.pass = pass;
 		this.name = name;
@@ -76,30 +79,31 @@ public class User implements Persistable {
 		this.CPF = CPF;
 	}
 
-	public String getUser() {
+	public String getUser()
+	{
 		return user;
 	}
-	
+
 	public String getName()
 	{
 		return name;
 	}
-	
+
 	public String getAddress()
 	{
 		return address;
 	}
-	
+
 	public String getCard()
 	{
 		return cardNumber;
 	}
-	
+
 	public String getAgency()
 	{
 		return agency;
 	}
-	
+
 	public String getAcc()
 	{
 		return accNumber;
@@ -112,23 +116,23 @@ public class User implements Persistable {
 	 *            the pass
 	 * @return true, if the password is valid
 	 */
-	public boolean isValidPassword(String pass) {
-		if (this.pass.equals(pass))
-			return true;
+	public boolean isValidPassword( String pass )
+	{
+		if( this.pass.equals( pass ) ) return true;
 
 		return false;
 	}
 
 	/**
-	 * Checks if this is valid user checking if the required fields are not empty.
-	 *
+	 * Checks if this is valid user checking if the required fields are not
+	 * empty.
+	 * 
 	 * @return true, if the user is valid
 	 */
 	public boolean isValidUser()
 	{
-		if (!name.equals("") && !CPF.equals("") && !user.equals("") && !pass.equals(""))
-			return true;
-		
+		if( !name.equals( "" ) && !CPF.equals( "" ) && !user.equals( "" ) && !pass.equals( "" ) ) return true;
+
 		return false;
 	}
 
@@ -138,8 +142,9 @@ public class User implements Persistable {
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
-	public int hashCode() {
-		return Objects.hashCode(user);
+	public int hashCode()
+	{
+		return Objects.hashCode( user );
 	}
 
 	/*
@@ -148,9 +153,10 @@ public class User implements Persistable {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals( Object obj )
+	{
 		final User user = (User) obj;
-		return Objects.equal(this.user, user.user);
+		return Objects.equal( this.user, user.user );
 	}
 
 	/*
@@ -159,7 +165,8 @@ public class User implements Persistable {
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString() {
-		return Objects.toStringHelper(this).add("user", user).toString();
+	public String toString()
+	{
+		return Objects.toStringHelper( this ).add( "user", user ).toString();
 	}
 }

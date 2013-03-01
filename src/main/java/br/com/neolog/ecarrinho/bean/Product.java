@@ -19,11 +19,12 @@ import com.google.common.base.Objects;
  *         description, price and its icon.
  */
 @Entity
-@Access(AccessType.FIELD)
-public class Product implements Persistable {
+@Access( AccessType.FIELD )
+public class Product implements Persistable
+{
 
 	public static final String ICON_PATH = "src//main//resources//icon//";
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -43,29 +44,35 @@ public class Product implements Persistable {
 	/**
 	 * Empty default constructor for hibernate.
 	 */
-	public Product() {
+	public Product()
+	{
 	}
 
-	public Product(Category category, String description, Double price, String iconName) {
+	public Product( Category category, String description, Double price, String iconName )
+	{
 		this.category = category;
 		this.description = description;
 		this.price = price;
 		this.iconName = iconName;
 	}
 
-	public Long getId() {
+	public Long getId()
+	{
 		return id;
 	}
 
-	public String getDescription() {
+	public String getDescription()
+	{
 		return description;
 	}
 
-	public Double getPrice() {
+	public Double getPrice()
+	{
 		return price;
 	}
 
-	public String getIconName() {
+	public String getIconName()
+	{
 		return iconName;
 	}
 
@@ -75,8 +82,9 @@ public class Product implements Persistable {
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
-	public int hashCode() {
-		return Objects.hashCode(description, price);
+	public int hashCode()
+	{
+		return Objects.hashCode( description, price );
 	}
 
 	/*
@@ -85,10 +93,10 @@ public class Product implements Persistable {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals( Object obj )
+	{
 		final Product product = (Product) obj;
-		return Objects.equal(this.price, product.price)
-				&& Objects.equal(this.description, product.description);
+		return Objects.equal( this.price, product.price ) && Objects.equal( this.description, product.description );
 	}
 
 	/*
@@ -97,8 +105,8 @@ public class Product implements Persistable {
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString() {
-		return Objects.toStringHelper(this).add("Description", description)
-				.add("Price", price).toString();
+	public String toString()
+	{
+		return Objects.toStringHelper( this ).add( "Description", description ).add( "Price", price ).toString();
 	}
 }

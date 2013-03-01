@@ -23,14 +23,15 @@ import br.com.neolog.ecarrinho.util.WrapLayout;
  * @author antonio.moreira
  */
 @Component
-public class ProductsPanel extends JPanel {
+public class ProductsPanel extends JPanel
+{
 
 	@Autowired
 	private ProductService productService;
 
 	@Autowired
 	private BasketService basketService;
-	
+
 	@Autowired
 	private AcquisitionService acquisitionService;
 
@@ -41,14 +42,16 @@ public class ProductsPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public ProductsPanel() {
+	public ProductsPanel()
+	{
 		this.setLayout(new WrapLayout(FlowLayout.LEFT, 0, 0));
 	}
 
 	/**
 	 * Load all products persisted.
 	 */
-	public void loadProducts() {
+	public void loadProducts()
+	{
 		addProducts(productService.getAllProducts());
 	}
 
@@ -58,28 +61,30 @@ public class ProductsPanel extends JPanel {
 	 * @param products
 	 *            the products to be showed
 	 */
-	public void loadProducts(List<Product> products) {
+	public void loadProducts( List<Product> products )
+	{
 		addProducts(products);
 	}
 
-	private void addProducts(List<Product> products) {
+	private void addProducts( List<Product> products )
+	{
 		removeAll();
-		for (Product product : products) {
+		for (Product product : products)
+		{
 			add(new ProductSpot(product, this));
 		}
 	}
 
-	public void addToBasket(Product product, Long amount) {
+	public void addToBasket( Product product, Long amount )
+	{
 		try
 		{
 			basketService.addToBasket(product, amount);
 		}
-		catch( IllegalArgumentException e)
+		catch (IllegalArgumentException e)
 		{
-			JOptionPane.showMessageDialog(getParent(),
-					"Quantidade pedida não disponível em estoque.\n" +
-					"Quantidade disponível: " + acquisitionService.stockAmount(product), "!",
-					JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(getParent(), "Quantidade pedida não disponível em estoque.\n" + "Quantidade disponível: "
+					+ acquisitionService.stockAmount(product), "!", JOptionPane.INFORMATION_MESSAGE);
 		}
 		productsOnBasketHolder.refreshBasket();
 	}
